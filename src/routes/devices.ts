@@ -47,7 +47,7 @@ router.get("/", async (_req, res) => {
 
 // DELETE /devices/:id – Smaže zařízení
 router.delete("/:id", async (req, res) => {
-    const { id } = req.params;
+    const { id } = req.params as { id: string };
 
     const device = await prisma.device.findUnique({ where: { id } });
     if (!device) {
@@ -62,7 +62,7 @@ router.delete("/:id", async (req, res) => {
 // POST /devices/:id/heartbeat – TV říká "jsem online" + posílá status
 // Vyžaduje autentizaci tokenem
 router.post("/:id/heartbeat", deviceAuth, async (req, res) => {
-    const { id } = req.params;
+    const { id } = req.params as { id: string };
     const { currentVideo } = req.body as { currentVideo?: string };
 
     // Zkontrolujeme, že token patří k tomuto zařízení
@@ -94,7 +94,7 @@ router.post("/:id/heartbeat", deviceAuth, async (req, res) => {
 
 // POST /devices/:id/command – Admin pošle příkaz TV
 router.post("/:id/command", async (req, res) => {
-    const { id } = req.params;
+    const { id } = req.params as { id: string };
     const { action } = req.body as { action?: string };
 
     const validCommands = ["restart", "reload_playlist"];
