@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Device {
+  id             String        @id @default(cuid())
+  name           String
+  token          String        @unique
+  lastSeen       DateTime?
+  pendingCommand String?       // "restart" | "reload_playlist" | null
+  createdAt      DateTime      @default(now())
+
+  playlist       PlaylistItem[]
+}
+
+model Video {
+  id        String   @id @default(cuid())
+  name      String
+  filename  String   @unique
+  mimeType  String
+  size      Int
+  createdAt DateTime @default(now())
+
+  playlist  PlaylistItem[]
+}
+
+model PlaylistItem {
+  id        String   @id @default(cuid())
+  order     Int
+  device    Device   @relation(fields: [deviceId], references: [id], onDelete: Cascade)
+  deviceId  String
+  video     Video    @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  videoId   String
+  createdAt DateTime @default(now())
+
+  @@unique([deviceId, videoId])
+}
