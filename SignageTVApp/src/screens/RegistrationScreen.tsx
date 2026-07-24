@@ -9,19 +9,23 @@ import {
 } from "react-native";
 import { getEndpoints } from "../config";
 import { setDeviceData } from "../services/storage";
+import { SettingsScreen } from "./SettingsScreen";
 
 interface RegistrationScreenProps {
     serverUrl: string;
     onRegisterSuccess: () => void;
+    onServerUrlChange: (newUrl: string) => void;
 }
 
 export const RegistrationScreen: React.FC<RegistrationScreenProps> = ({
     serverUrl,
     onRegisterSuccess,
+    onServerUrlChange,
 }) => {
     const [deviceName, setDeviceName] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [showSettings, setShowSettings] = useState(false);
 
     const handleRegister = async () => {
         if (!deviceName.trim()) {
@@ -63,6 +67,21 @@ export const RegistrationScreen: React.FC<RegistrationScreenProps> = ({
         }
     };
 
+    if (showSettings) {
+        return (
+            <View style={styles.fullPage}>
+                <SettingsScreen
+                    serverUrl={serverUrl}
+                    onSave={(newUrl) => {
+                        onServerUrlChange(newUrl);
+                        setShowSettings(false);
+                    }}
+                    onBack={() => setShowSettings(false)}
+                />
+            </View>
+        );
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.card}>
@@ -73,8 +92,16 @@ export const RegistrationScreen: React.FC<RegistrationScreenProps> = ({
 
                 {/* Server URL info */}
                 <View style={styles.serverInfo}>
-                    <Text style={styles.serverLabel}>Server:</Text>
-                    <Text style={styles.serverUrl}>{serverUrl}</Text>
+                    <View style={styles.serverInfoLeft}>
+                        <Text style={styles.serverLabel}>Server:</Text>
+                        <Text style={styles.serverUrl}>{serverUrl}</Text>
+                    </View>
+                    <TouchableOpacity
+                        style={styles.editBtn}
+                        onPress={() => setShowSettings(true)}
+                    >
+                        <Text style={styles.editBtnText}>✏️ Změnit</Text>
+                    </TouchableOpacity>
                 </View>
 
                 <TextInput
@@ -135,12 +162,28 @@ const styles = StyleSheet.create({
     serverInfo: {
         flexDirection: "row",
         alignItems: "center",
+        justifyContent: "space-between",
         backgroundColor: "#111",
         borderRadius: 8,
-        paddingVertical: 8,
+        paddingVertical: 10,
         paddingHorizontal: 14,
         marginBottom: 24,
+        width: "100%",
+    },
+    serverInfoLeft: {
+        flexDirection: "row",
+        alignItems: "center",
         gap: 8,
+    },
+    editBtn: {
+        backgroundColor: "#333",
+        paddingHorizontal: 12,
+        paddingVertical: 6,
+        borderRadius: 6,
+    },
+    editBtnText: {
+        color: "#fff",
+        fontSize: 14,
     },
     serverLabel: {
         color: "#666",
@@ -181,4 +224,9 @@ const styles = StyleSheet.create({
         fontSize: 16,
         textAlign: "center",
     },
+    fullPage: {
+        flex: 1,
+        width: "100%",
+        backgroundColor: "#0f0f1a",
+    }
 });

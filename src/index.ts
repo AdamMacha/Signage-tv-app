@@ -1,9 +1,15 @@
 import express from "express";
 import cors from "cors";
+import fs from "fs";
 
 import devicesRouter from "./routes/devices.js";
 import videosRouter from "./routes/videos.js";
 import playlistRouter from "./routes/playlist.js";
+
+// Ujištění, že složka uploads existuje (i pro dočasné soubory)
+if (!fs.existsSync("uploads")) {
+    fs.mkdirSync("uploads");
+}
 
 const app = express();
 

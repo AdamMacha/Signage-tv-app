@@ -51,6 +51,7 @@ const App = () => {
                 <RegistrationScreen
                     serverUrl={serverUrl}
                     onRegisterSuccess={initialize}
+                    onServerUrlChange={handleServerUrlChange}
                 />
             )}
         </SafeAreaView>

@@ -1,9 +1,9 @@
 import { Router } from "express";
 import path from "path";
 import fs from "fs/promises";
-import { createReadStream, statSync } from "fs";
 import multer from "multer";
 import { prisma } from "../lib/prisma.js";
+import { supabase } from "../lib/supabase.js";
 
 const router = Router();
 
@@ -29,23 +29,50 @@ const upload = multer({
     },
 });
 
-// POST /videos/upload – Nahrání nového videa
+// POST /videos/upload – Nahrání nového videa (nyní s uploadem na Supabase)
 router.post("/upload", upload.single("video"), async (req, res) => {
     if (!req.file) {
         res.status(400).json({ error: "No file uploaded" });
         return;
     }
 
-    const video = await prisma.video.create({
-        data: {
-            name: (req.body.name as string) || req.file.originalname,
-            filename: req.file.filename,
-            mimeType: req.file.mimetype,
-            size: req.file.size,
-        },
-    });
+    try {
+        const fileBuffer = await fs.readFile(req.file.path);
+        const { error: uploadError } = await supabase.storage
+            .from("videos")
+            .upload(req.file.filename, fileBuffer, {
+                contentType: req.file.mimetype,
+                cacheControl: "3600",
+                upsert: false,
+            });
 
-    res.status(201).json(video);
+        // Vždy smažeme dočasný soubor z disku Render serveru, i když to spadne
+        await fs.unlink(req.file.path).catch(console.error);
+
+        if (uploadError) {
+            console.error("Supabase upload error:", uploadError);
+            res.status(500).json({ error: "Failed to upload video to cloud storage" });
+            return;
+        }
+
+        const video = await prisma.video.create({
+            data: {
+                name: (req.body.name as string) || req.file.originalname,
+                filename: req.file.filename,
+                mimeType: req.file.mimetype,
+                size: req.file.size,
+            },
+        });
+
+        res.status(201).json(video);
+    } catch (err) {
+        console.error("Upload handler error:", err);
+        // Smazat z disku při neočekávané chybě
+        if (req.file) {
+            await fs.unlink(req.file.path).catch(() => {});
+        }
+        res.status(500).json({ error: "Internal server error during upload" });
+    }
 });
 
 // GET /videos – Seznam všech videí
@@ -56,49 +83,8 @@ router.get("/", async (_req, res) => {
     res.json(videos);
 });
 
-// GET /videos/stream/:filename – Streaming videa pro TV
-// Podporuje HTTP Range requesty (Android ExoPlayer to vyžaduje)
-router.get("/stream/:filename", (req, res) => {
-    const { filename } = req.params;
-    const filePath = path.join("uploads", filename);
-
-    let stat;
-    try {
-        stat = statSync(filePath);
-    } catch {
-        res.status(404).json({ error: "File not found" });
-        return;
-    }
-
-    const fileSize = stat.size;
-    const range = req.headers.range;
-
-    if (range) {
-        // Partial content – Android ExoPlayer posílá Range hlavičky
-        const parts = range.replace(/bytes=/, "").split("-");
-        const start = parseInt(parts[0] ?? "0", 10);
-        const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
-        const chunkSize = end - start + 1;
-
-        res.writeHead(206, {
-            "Content-Range": `bytes ${start}-${end}/${fileSize}`,
-            "Accept-Ranges": "bytes",
-            "Content-Length": chunkSize,
-            "Content-Type": "video/mp4",
-        });
-
-        createReadStream(filePath, { start, end }).pipe(res);
-    } else {
-        // Celý soubor najednou
-        res.writeHead(200, {
-            "Content-Length": fileSize,
-            "Content-Type": "video/mp4",
-            "Accept-Ranges": "bytes",
-        });
-
-        createReadStream(filePath).pipe(res);
-    }
-});
+// Původní lokální streamování (GET /videos/stream/:filename) bylo odstraněno.
+// Televize nyní bude stahovat videa přímo ze Supabase Storage veřejných URL.
 
 // DELETE /videos/:id – Smaže video z DB i z disku
 router.delete("/:id", async (req, res) => {
@@ -110,11 +96,10 @@ router.delete("/:id", async (req, res) => {
         return;
     }
 
-    // Smazat fyzický soubor
-    try {
-        await fs.unlink(path.join("uploads", video.filename));
-    } catch {
-        console.warn(`File not found on disk: ${video.filename}`);
+    // Smazat ze Supabase Storage
+    const { error: storageError } = await supabase.storage.from("videos").remove([video.filename]);
+    if (storageError) {
+        console.warn(`Failed to delete video from Supabase: ${storageError.message}`);
     }
 
     // Smazat z DB (PlaylistItems se smažou automaticky díky onDelete: Cascade)

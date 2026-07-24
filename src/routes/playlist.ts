@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { prisma } from "../lib/prisma.js";
 import { deviceAuth } from "../middleware/auth.js";
+import { supabase } from "../lib/supabase.js";
 
 const router = Router({ mergeParams: true }); // Dědí :id z nadřazeného routeru
 
@@ -31,14 +32,12 @@ router.get("/", deviceAuth, async (req, res) => {
         },
     });
 
-    // Přidáme download URL pro každé video
-    const baseUrl = `${req.protocol}://${req.get("host")}`;
     const playlist = items.map((item) => ({
         playlistItemId: item.id,
         order: item.order,
         video: {
             ...item.video,
-            downloadUrl: `${baseUrl}/videos/stream/${item.video.filename}`,
+            downloadUrl: supabase.storage.from("videos").getPublicUrl(item.video.filename).data.publicUrl,
         },
     }));
 
