@@ -25,6 +25,14 @@ app.get("/", (_req, res) => {
     res.json({ status: "ok", message: "Signage Server is running" });
 });
 
+// Globální error handler pro zachycení neošetřených výjimek (vrací JSON)
+app.use((err: any, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
+    console.error("Server error:", err);
+    res.status(err.status || 500).json({
+        error: err.message || "Internal server error",
+    });
+});
+
 const PORT = process.env.PORT ? parseInt(process.env.PORT) : 3000;
 
 app.listen(PORT, () => {

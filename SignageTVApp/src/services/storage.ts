@@ -10,7 +10,7 @@ const DEVICE_STORAGE_KEY = "@device_data";
 const SERVER_URL_KEY = "@server_url";
 
 // Výchozí URL – slouží jako fallback, pokud uživatel nenastavil vlastní
-export const DEFAULT_SERVER_URL = "http://192.168.0.249:3000";
+export const DEFAULT_SERVER_URL = "https://alionadvert.onrender.com";
 
 // ── Device data ────────────────────────────────────────────────────────────
 

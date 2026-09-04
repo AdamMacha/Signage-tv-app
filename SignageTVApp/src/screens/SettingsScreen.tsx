@@ -27,12 +27,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
     const [error, setError] = useState<string | null>(null);
 
     const validateUrl = (url: string): boolean => {
-        try {
-            const parsed = new URL(url);
-            return parsed.protocol === "http:" || parsed.protocol === "https:";
-        } catch {
-            return false;
-        }
+        return /^https?:\/\/[^\s/$.?#].[^\s]*$/i.test(url);
     };
 
     const handleSave = async () => {

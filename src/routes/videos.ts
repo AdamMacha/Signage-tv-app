@@ -3,7 +3,7 @@ import path from "path";
 import fs from "fs/promises";
 import multer from "multer";
 import { prisma } from "../lib/prisma.js";
-import { supabase } from "../lib/supabase.js";
+import { supabase, isSupabaseConfigured } from "../lib/supabase.js";
 
 const router = Router();
 
@@ -33,6 +33,12 @@ const upload = multer({
 router.post("/upload", upload.single("video"), async (req, res) => {
     if (!req.file) {
         res.status(400).json({ error: "No file uploaded" });
+        return;
+    }
+
+    if (!isSupabaseConfigured) {
+        await fs.unlink(req.file.path).catch(() => {});
+        res.status(503).json({ error: "Cloud storage is not configured (missing SUPABASE_URL / SUPABASE_KEY)" });
         return;
     }
 

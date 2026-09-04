@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { SafeAreaView, StatusBar, ActivityIndicator, View } from "react-native";
+import { SafeAreaView, StatusBar, ActivityIndicator, View, StyleSheet } from "react-native";
 import { RegistrationScreen } from "./src/screens/RegistrationScreen";
 import { PlayerScreen } from "./src/screens/PlayerScreen";
 import {
@@ -27,7 +27,7 @@ const App = () => {
 
     if (loading) {
         return (
-            <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#000" }}>
+            <View style={styles.loadingContainer}>
                 <ActivityIndicator size="large" color="#fff" />
             </View>
         );
@@ -38,7 +38,7 @@ const App = () => {
     const handleServerUrlChange = (newUrl: string) => setServerUrl(newUrl);
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: "#000" }}>
+        <SafeAreaView style={styles.safeArea}>
             <StatusBar hidden />
             {device ? (
                 <PlayerScreen
@@ -57,5 +57,18 @@ const App = () => {
         </SafeAreaView>
     );
 };
+
+const styles = StyleSheet.create({
+    loadingContainer: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#000",
+    },
+    safeArea: {
+        flex: 1,
+        backgroundColor: "#000",
+    },
+});
 
 export default App;

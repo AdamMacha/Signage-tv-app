@@ -67,6 +67,71 @@ export const PlayerScreen: React.FC<PlayerScreenProps> = ({
     useEffect(() => { localFilesRef.current = localFiles; }, [localFiles]);
     useEffect(() => { serverUrlRef.current = serverUrl; }, [serverUrl]);
 
+    const VIDEOS_DIR = `${RNFS.DocumentDirectoryPath}/videos`;
+
+    // ── Sync souborů ───────────────────────────────────────────────────────
+
+    const syncFiles = useCallback(async (remotePlaylist: PlaylistItem[]) => {
+        try {
+            const dirExists = await RNFS.exists(VIDEOS_DIR);
+            if (!dirExists) {
+                await RNFS.mkdir(VIDEOS_DIR);
+            }
+
+            const dirFiles = await RNFS.readDir(VIDEOS_DIR);
+            const videoFiles = dirFiles.filter(f => f.isFile());
+            const downloadedFilenames = videoFiles.map(f => f.name);
+            const totalSizeKb = Math.round(
+                videoFiles.reduce((sum, f) => sum + Number(f.size), 0) / 1024
+            );
+            setLocalFiles(downloadedFilenames);
+            setLocalFilesSizeKb(totalSizeKb);
+            localFilesRef.current = downloadedFilenames;
+
+            let isDownloading = false;
+
+            for (const item of remotePlaylist) {
+                if (!downloadedFilenames.includes(item.video.filename)) {
+                    isDownloading = true;
+                    setDownloading(true);
+                    const toPath = `${VIDEOS_DIR}/${item.video.filename}`;
+                    try {
+                        const result = await RNFS.downloadFile({
+                            fromUrl: item.video.downloadUrl,
+                            toFile: toPath,
+                        }).promise;
+                        if (result.statusCode === 200) {
+                            setLocalFiles(prev => {
+                                const updated = [...prev, item.video.filename];
+                                localFilesRef.current = updated;
+                                return updated;
+                            });
+                        }
+                    } catch (err) {
+                        console.error("Download error:", err);
+                    }
+                }
+            }
+
+            // Smazání souborů navíc (pouze z vyhrazené složky pro videa)
+            const remoteFilenames = remotePlaylist.map(p => p.video.filename);
+            for (const file of videoFiles) {
+                if (!remoteFilenames.includes(file.name)) {
+                    await RNFS.unlink(file.path);
+                    setLocalFiles(prev => {
+                        const updated = prev.filter(f => f !== file.name);
+                        localFilesRef.current = updated;
+                        return updated;
+                    });
+                }
+            }
+
+            if (isDownloading) setDownloading(false);
+        } catch (e) {
+            console.error("Sync error", e);
+        }
+    }, [VIDEOS_DIR]);
+
     // ── Načítání playlistu ─────────────────────────────────────────────────
 
     const fetchPlaylist = useCallback(async () => {
@@ -87,7 +152,7 @@ export const PlayerScreen: React.FC<PlayerScreenProps> = ({
         } catch (e) {
             console.error("Fetch playlist failed", e);
         }
-    }, [device.id, device.token]);
+    }, [device.id, device.token, syncFiles]);
 
     // ── Heartbeat ─────────────────────────────────────────────────────────
 
@@ -125,63 +190,6 @@ export const PlayerScreen: React.FC<PlayerScreenProps> = ({
             setIsOnline(false);
         }
     }, [device.id, device.token, fetchPlaylist]);
-
-    // ── Sync souborů ───────────────────────────────────────────────────────
-
-    const syncFiles = async (remotePlaylist: PlaylistItem[]) => {
-        try {
-            const dirFiles = await RNFS.readDir(RNFS.DocumentDirectoryPath);
-            const downloadedFilenames = dirFiles.map(f => f.name);
-            const totalSizeKb = Math.round(
-                dirFiles.reduce((sum, f) => sum + Number(f.size), 0) / 1024
-            );
-            setLocalFiles(downloadedFilenames);
-            setLocalFilesSizeKb(totalSizeKb);
-            localFilesRef.current = downloadedFilenames;
-
-            let isDownloading = false;
-
-            for (const item of remotePlaylist) {
-                if (!downloadedFilenames.includes(item.video.filename)) {
-                    isDownloading = true;
-                    setDownloading(true);
-                    const toPath = `${RNFS.DocumentDirectoryPath}/${item.video.filename}`;
-                    try {
-                        const result = await RNFS.downloadFile({
-                            fromUrl: item.video.downloadUrl,
-                            toFile: toPath,
-                        }).promise;
-                        if (result.statusCode === 200) {
-                            setLocalFiles(prev => {
-                                const updated = [...prev, item.video.filename];
-                                localFilesRef.current = updated;
-                                return updated;
-                            });
-                        }
-                    } catch (err) {
-                        console.error("Download error:", err);
-                    }
-                }
-            }
-
-            // Smazání souborů navíc
-            const remoteFilenames = remotePlaylist.map(p => p.video.filename);
-            for (const file of dirFiles) {
-                if (!remoteFilenames.includes(file.name)) {
-                    await RNFS.unlink(file.path);
-                    setLocalFiles(prev => {
-                        const updated = prev.filter(f => f !== file.name);
-                        localFilesRef.current = updated;
-                        return updated;
-                    });
-                }
-            }
-
-            if (isDownloading) setDownloading(false);
-        } catch (e) {
-            console.error("Sync error", e);
-        }
-    };
 
     // ── Inicializace + intervaly ───────────────────────────────────────────
 
@@ -242,7 +250,7 @@ export const PlayerScreen: React.FC<PlayerScreenProps> = ({
 
     const currentItem = playlist[currentIndex];
     const videoSource = currentItem
-        ? `${RNFS.DocumentDirectoryPath}/${currentItem.video.filename}`
+        ? `file://${VIDEOS_DIR}/${currentItem.video.filename}`
         : null;
 
     // ── Render ─────────────────────────────────────────────────────────────
