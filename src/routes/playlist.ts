@@ -6,14 +6,31 @@ import { supabase } from "../lib/supabase.js";
 const router = Router({ mergeParams: true }); // Dědí :id z nadřazeného routeru
 
 // GET /devices/:id/playlist – Vrátí aktuální playlist (pro TV i admina)
-// TV se autentizuje tokenem
-router.get("/", deviceAuth, async (req, res) => {
+router.get("/", async (req, res) => {
     const { id } = req.params as { id: string };
 
-    // Zkontrolujeme, že token patří k tomuto zařízení
-    if (req.device?.id !== id) {
-        res.status(403).json({ error: "Token does not match device" });
+    // Ověříme, že zařízení existuje
+    const deviceExists = await prisma.device.findUnique({ where: { id } });
+    if (!deviceExists) {
+        res.status(404).json({ error: "Device not found" });
         return;
+    }
+
+    // Pokud TV posílá token, ověříme shodu
+    const authHeader = req.headers.authorization;
+    const token = authHeader?.startsWith("Bearer ")
+        ? authHeader.slice(7)
+        : (req.query.token as string);
+
+    if (token) {
+        const device = await prisma.device.findUnique({
+            where: { token },
+            select: { id: true },
+        });
+        if (!device || device.id !== id) {
+            res.status(403).json({ error: "Token does not match device" });
+            return;
+        }
     }
 
     const items = await prisma.playlistItem.findMany({
