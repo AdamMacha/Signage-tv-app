@@ -15,6 +15,8 @@ import { DevicesView } from "../components/DevicesView";
 import { MediaLibrary } from "../components/MediaLibrary";
 import { PlaylistManager } from "../components/PlaylistManager";
 import { Device, Video, fetchDevices, fetchVideos } from "../lib/api";
+import { useRouter } from "next/navigation";
+import { isAuthenticated } from "../lib/auth";
 
 type Tab = "overview" | "devices" | "media" | "playlists";
 
@@ -27,12 +29,23 @@ export default function AdminDashboardPage() {
     const [error, setError] = useState<string | null>(null);
     const [selectedDeviceId, setSelectedDeviceId] = useState<string | undefined>(undefined);
 
+    const router = useRouter();
+    const [authChecked, setAuthChecked] = useState(false);
     const [now, setNow] = useState<number>(() => (typeof window !== "undefined" ? Date.now() : 0));
 
     useEffect(() => {
+        if (!isAuthenticated()) {
+            router.replace("/login");
+        } else {
+            setAuthChecked(true);
+        }
+    }, [router]);
+
+    useEffect(() => {
+        if (!authChecked) return;
         const timer = setInterval(() => setNow(Date.now()), 10000);
         return () => clearInterval(timer);
-    }, []);
+    }, [authChecked]);
 
     // Načtení dat ze serveru
     const loadData = useCallback(async (isSilent = false) => {
@@ -56,6 +69,7 @@ export default function AdminDashboardPage() {
 
     // Inicializace
     useEffect(() => {
+        if (!authChecked) return;
         let isCancelled = false;
         Promise.all([fetchDevices(), fetchVideos()])
             .then(([devicesData, videosData]) => {
@@ -76,15 +90,16 @@ export default function AdminDashboardPage() {
         return () => {
             isCancelled = true;
         };
-    }, []);
+    }, [authChecked]);
 
     // Periodický auto-refresh každých 15 sekund pro živé sledování stavu TV
     useEffect(() => {
+        if (!authChecked) return;
         const interval = setInterval(() => {
             loadData(true);
         }, 15000);
         return () => clearInterval(interval);
-    }, [loadData]);
+    }, [authChecked, loadData]);
 
     // Přepnutí do playlist manažeru pro konkrétní zařízení
     const handleManagePlaylist = (device: Device) => {
@@ -104,6 +119,17 @@ export default function AdminDashboardPage() {
         { id: "media", label: "Knihovna videí", icon: Film, count: videos.length },
         { id: "playlists", label: "Playlist Builder", icon: ListMusic },
     ];
+
+    if (!authChecked) {
+        return (
+            <div className="min-h-screen bg-[#090b10] flex items-center justify-center">
+                <div className="flex flex-col items-center gap-3">
+                    <div className="w-8 h-8 border-2 border-indigo-500/30 border-t-indigo-500 rounded-full animate-spin" />
+                    <span className="text-xs text-slate-400">Ověřování oprávnění...</span>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen bg-[#090b10] flex flex-col text-slate-100 selection:bg-indigo-500 selection:text-white">

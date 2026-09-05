@@ -1,11 +1,11 @@
 import { Router } from "express";
 import { prisma } from "../lib/prisma.js";
-import { deviceAuth } from "../middleware/auth.js";
 import { supabase } from "../lib/supabase.js";
+import { adminAuth, DEFAULT_ADMIN_KEY } from "../middleware/adminAuth.js";
 
 const router = Router({ mergeParams: true }); // Dědí :id z nadřazeného routeru
 
-// GET /devices/:id/playlist – Vrátí aktuální playlist (pro TV i admina)
+// GET /devices/:id/playlist – Vrátí aktuální playlist (přístup pro TV s tokenem nebo admina s admin klíčem)
 router.get("/", async (req, res) => {
     const { id } = req.params as { id: string };
 
@@ -16,20 +16,35 @@ router.get("/", async (req, res) => {
         return;
     }
 
-    // Pokud TV posílá token, ověříme shodu
-    const authHeader = req.headers.authorization;
-    const token = authHeader?.startsWith("Bearer ")
-        ? authHeader.slice(7)
-        : (req.query.token as string);
+    const configuredAdminKey = process.env.ADMIN_API_KEY || DEFAULT_ADMIN_KEY;
+    const customAdminHeader = req.headers["x-admin-key"] as string | undefined;
 
-    if (token) {
-        const device = await prisma.device.findUnique({
-            where: { token },
-            select: { id: true },
-        });
-        if (!device || device.id !== id) {
-            res.status(403).json({ error: "Token does not match device" });
+    // 1. Ověření administrátora přes x-admin-key
+    if (customAdminHeader && customAdminHeader === configuredAdminKey) {
+        // Admin povolen
+    } else {
+        // 2. Ověření TV tokenu nebo admin Bearer tokenu
+        const authHeader = req.headers.authorization;
+        const token = authHeader?.startsWith("Bearer ")
+            ? authHeader.slice(7)
+            : (req.query.token as string);
+
+        if (!token) {
+            res.status(401).json({ error: "Unauthorized: Chybí autorizace (token zařízení nebo admin klíč)" });
             return;
+        }
+
+        if (token === configuredAdminKey) {
+            // Admin povolen přes Bearer
+        } else {
+            const device = await prisma.device.findUnique({
+                where: { token },
+                select: { id: true },
+            });
+            if (!device || device.id !== id) {
+                res.status(403).json({ error: "Token does not match device" });
+                return;
+            }
         }
     }
 
@@ -61,8 +76,8 @@ router.get("/", async (req, res) => {
     res.json(playlist);
 });
 
-// POST /devices/:id/playlist – Admin přidá video do playlistu TV
-router.post("/", async (req, res) => {
+// POST /devices/:id/playlist – Admin přidá video do playlistu TV (zabezpečeno admin klíčem)
+router.post("/", adminAuth, async (req, res) => {
     const { id: deviceId } = req.params as { id: string };
     const { videoId, order } = req.body as { videoId?: string; order?: number };
 
@@ -103,8 +118,8 @@ router.post("/", async (req, res) => {
     res.status(201).json(item);
 });
 
-// DELETE /devices/:id/playlist/:videoId – Admin odebere video z playlistu
-router.delete("/:videoId", async (req, res) => {
+// DELETE /devices/:id/playlist/:videoId – Admin odebere video z playlistu (zabezpečeno admin klíčem)
+router.delete("/:videoId", adminAuth, async (req, res) => {
     const { id: deviceId, videoId } = req.params as { id: string; videoId: string };
 
     const item = await prisma.playlistItem.findUnique({
@@ -123,8 +138,8 @@ router.delete("/:videoId", async (req, res) => {
     res.json({ message: "Video removed from playlist" });
 });
 
-// PUT /devices/:id/playlist/reorder – Admin změní pořadí videí
-router.put("/reorder", async (req, res) => {
+// PUT /devices/:id/playlist/reorder – Admin změní pořadí videí (zabezpečeno admin klíčem)
+router.put("/reorder", adminAuth, async (req, res) => {
     const { id: deviceId } = req.params as { id: string };
     const { order } = req.body as { order?: Array<{ videoId: string; order: number }> };
 

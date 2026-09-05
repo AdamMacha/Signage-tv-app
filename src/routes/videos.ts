@@ -4,6 +4,7 @@ import fs from "fs/promises";
 import multer from "multer";
 import { prisma } from "../lib/prisma.js";
 import { supabase, isSupabaseConfigured } from "../lib/supabase.js";
+import { adminAuth } from "../middleware/adminAuth.js";
 
 const router = Router();
 
@@ -29,8 +30,8 @@ const upload = multer({
     },
 });
 
-// POST /videos/upload – Nahrání nového videa (nyní s uploadem na Supabase)
-router.post("/upload", upload.single("video"), async (req, res) => {
+// POST /videos/upload – Nahrání nového videa (zabezpečeno admin klíčem)
+router.post("/upload", adminAuth, upload.single("video"), async (req, res) => {
     if (!req.file) {
         res.status(400).json({ error: "No file uploaded" });
         return;
@@ -81,20 +82,17 @@ router.post("/upload", upload.single("video"), async (req, res) => {
     }
 });
 
-// GET /videos – Seznam všech videí
-router.get("/", async (_req, res) => {
+// GET /videos – Seznam všech videí (zabezpečeno admin klíčem)
+router.get("/", adminAuth, async (_req, res) => {
     const videos = await prisma.video.findMany({
         orderBy: { createdAt: "desc" },
     });
     res.json(videos);
 });
 
-// Původní lokální streamování (GET /videos/stream/:filename) bylo odstraněno.
-// Televize nyní bude stahovat videa přímo ze Supabase Storage veřejných URL.
-
-// DELETE /videos/:id – Smaže video z DB i z disku
-router.delete("/:id", async (req, res) => {
-    const { id } = req.params;
+// DELETE /videos/:id – Smaže video z DB i z cloudu (zabezpečeno admin klíčem)
+router.delete("/:id", adminAuth, async (req, res) => {
+    const { id } = req.params as { id: string };
 
     const video = await prisma.video.findUnique({ where: { id } });
     if (!video) {

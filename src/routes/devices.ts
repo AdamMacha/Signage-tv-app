@@ -2,10 +2,11 @@ import { Router } from "express";
 import crypto from "crypto";
 import { prisma } from "../lib/prisma.js";
 import { deviceAuth } from "../middleware/auth.js";
+import { adminAuth } from "../middleware/adminAuth.js";
 
 const router = Router();
 
-// POST /devices – Vytvoří nové TV zařízení, vrátí token
+// POST /devices – Vytvoří nové TV zařízení, vrátí token (používáno TV i administrací)
 router.post("/", async (req, res) => {
     const { name } = req.body as { name?: string };
 
@@ -28,8 +29,8 @@ router.post("/", async (req, res) => {
     });
 });
 
-// GET /devices – Seznam všech zařízení (bez tokenů)
-router.get("/", async (_req, res) => {
+// GET /devices – Seznam všech zařízení (zabezpečeno admin klíčem)
+router.get("/", adminAuth, async (_req, res) => {
     const devices = await prisma.device.findMany({
         select: {
             id: true,
@@ -45,8 +46,8 @@ router.get("/", async (_req, res) => {
     res.json(devices);
 });
 
-// DELETE /devices/:id – Smaže zařízení
-router.delete("/:id", async (req, res) => {
+// DELETE /devices/:id – Smaže zařízení (zabezpečeno admin klíčem)
+router.delete("/:id", adminAuth, async (req, res) => {
     const { id } = req.params as { id: string };
 
     const device = await prisma.device.findUnique({ where: { id } });
@@ -92,8 +93,8 @@ router.post("/:id/heartbeat", deviceAuth, async (req, res) => {
     });
 });
 
-// POST /devices/:id/command – Admin pošle příkaz TV
-router.post("/:id/command", async (req, res) => {
+// POST /devices/:id/command – Admin pošle příkaz TV (zabezpečeno admin klíčem)
+router.post("/:id/command", adminAuth, async (req, res) => {
     const { id } = req.params as { id: string };
     const { action } = req.body as { action?: string };
 

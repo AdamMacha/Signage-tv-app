@@ -1,8 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import { Tv, RefreshCw, Settings, Radio } from "lucide-react";
+import { Tv, RefreshCw, Settings, Radio, LogOut } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { getApiUrl, setApiUrl, DEFAULT_API_URL } from "../lib/api";
+import { logout } from "../lib/auth";
 
 interface HeaderProps {
     onRefresh: () => void;
@@ -17,6 +19,7 @@ export const Header: React.FC<HeaderProps> = ({
     onlineCount,
     totalDevices,
 }) => {
+    const router = useRouter();
     const [showSettings, setShowSettings] = useState(false);
     const [serverUrl, setServerUrlState] = useState(getApiUrl());
     const [testResult, setTestResult] = useState<string | null>(null);
@@ -60,7 +63,7 @@ export const Header: React.FC<HeaderProps> = ({
                     <div>
                         <div className="flex items-center gap-2">
                             <h1 className="text-xl font-bold tracking-tight text-white">
-                                ALION <span className="text-gradient">Signage</span>
+                                ALION <span className="text-gradient">Advert</span>
                             </h1>
                             <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
                                 Admin Hub
@@ -106,6 +109,18 @@ export const Header: React.FC<HeaderProps> = ({
                         className="p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 text-slate-300 hover:text-white transition border border-white/5"
                     >
                         <Settings className="w-4 h-4" />
+                    </button>
+
+                    {/* Logout button */}
+                    <button
+                        onClick={() => {
+                            logout();
+                            router.push("/login");
+                        }}
+                        title="Odhlásit se z administrace"
+                        className="p-2 rounded-xl bg-slate-800/80 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 transition border border-white/5 hover:border-rose-500/30"
+                    >
+                        <LogOut className="w-4 h-4" />
                     </button>
                 </div>
             </div>

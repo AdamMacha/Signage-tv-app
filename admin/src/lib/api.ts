@@ -1,4 +1,5 @@
 // Typy a API klient pro komunikaci se Signage Serverem
+import { getAdminKey } from "./auth";
 
 export interface Device {
     id: string;
@@ -47,10 +48,21 @@ export const setApiUrl = (url: string): void => {
     localStorage.setItem(STORAGE_KEY_API_URL, url.trim().replace(/\/$/, ""));
 };
 
+const getAuthHeaders = (extraHeaders?: Record<string, string>): Record<string, string> => {
+    const key = getAdminKey();
+    return {
+        ...(extraHeaders || {}),
+        "x-admin-key": key,
+        Authorization: `Bearer ${key}`,
+    };
+};
+
 // ── Zařízení ───────────────────────────────────────────────────────────────
 
 export const fetchDevices = async (): Promise<Device[]> => {
-    const res = await fetch(`${getApiUrl()}/devices`);
+    const res = await fetch(`${getApiUrl()}/devices`, {
+        headers: getAuthHeaders(),
+    });
     if (!res.ok) throw new Error(`Chyba při načítání zařízení (${res.status})`);
     return res.json();
 };
@@ -58,7 +70,7 @@ export const fetchDevices = async (): Promise<Device[]> => {
 export const createDevice = async (name: string): Promise<Device & { token: string }> => {
     const res = await fetch(`${getApiUrl()}/devices`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: getAuthHeaders({ "Content-Type": "application/json" }),
         body: JSON.stringify({ name }),
     });
     if (!res.ok) throw new Error("Chyba při vytváření zařízení");
@@ -68,6 +80,7 @@ export const createDevice = async (name: string): Promise<Device & { token: stri
 export const deleteDevice = async (id: string): Promise<void> => {
     const res = await fetch(`${getApiUrl()}/devices/${id}`, {
         method: "DELETE",
+        headers: getAuthHeaders(),
     });
     if (!res.ok) throw new Error("Chyba při mazání zařízení");
 };
@@ -78,7 +91,7 @@ export const sendDeviceCommand = async (
 ): Promise<{ message: string }> => {
     const res = await fetch(`${getApiUrl()}/devices/${id}/command`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: getAuthHeaders({ "Content-Type": "application/json" }),
         body: JSON.stringify({ action }),
     });
     if (!res.ok) throw new Error(`Chyba při odesílání příkazu: ${action}`);
@@ -88,7 +101,9 @@ export const sendDeviceCommand = async (
 // ── Videa ──────────────────────────────────────────────────────────────────
 
 export const fetchVideos = async (): Promise<Video[]> => {
-    const res = await fetch(`${getApiUrl()}/videos`);
+    const res = await fetch(`${getApiUrl()}/videos`, {
+        headers: getAuthHeaders(),
+    });
     if (!res.ok) throw new Error(`Chyba při načítání videí (${res.status})`);
     return res.json();
 };
@@ -102,10 +117,13 @@ export const uploadVideo = async (
     formData.append("video", file);
     if (customName) formData.append("name", customName);
 
-    // Použijeme XMLHttpRequest pro sledování progressu
     return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
         xhr.open("POST", `${getApiUrl()}/videos/upload`);
+
+        const key = getAdminKey();
+        xhr.setRequestHeader("x-admin-key", key);
+        xhr.setRequestHeader("Authorization", `Bearer ${key}`);
 
         if (xhr.upload && onProgress) {
             xhr.upload.onprogress = (event) => {
@@ -142,6 +160,7 @@ export const uploadVideo = async (
 export const deleteVideo = async (id: string): Promise<void> => {
     const res = await fetch(`${getApiUrl()}/videos/${id}`, {
         method: "DELETE",
+        headers: getAuthHeaders(),
     });
     if (!res.ok) throw new Error("Chyba při mazání videa");
 };
@@ -149,7 +168,9 @@ export const deleteVideo = async (id: string): Promise<void> => {
 // ── Playlist ───────────────────────────────────────────────────────────────
 
 export const fetchDevicePlaylist = async (deviceId: string): Promise<PlaylistItem[]> => {
-    const res = await fetch(`${getApiUrl()}/devices/${deviceId}/playlist`);
+    const res = await fetch(`${getApiUrl()}/devices/${deviceId}/playlist`, {
+        headers: getAuthHeaders(),
+    });
     if (!res.ok) throw new Error(`Chyba při načítání playlistu (${res.status})`);
     return res.json();
 };
@@ -161,7 +182,7 @@ export const addVideoToPlaylist = async (
 ): Promise<unknown> => {
     const res = await fetch(`${getApiUrl()}/devices/${deviceId}/playlist`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: getAuthHeaders({ "Content-Type": "application/json" }),
         body: JSON.stringify({ videoId, order }),
     });
     if (!res.ok) throw new Error("Chyba při přidávání videa do playlistu");
@@ -174,6 +195,7 @@ export const removeVideoFromPlaylist = async (
 ): Promise<void> => {
     const res = await fetch(`${getApiUrl()}/devices/${deviceId}/playlist/${videoId}`, {
         method: "DELETE",
+        headers: getAuthHeaders(),
     });
     if (!res.ok) throw new Error("Chyba při odstraňování videa z playlistu");
 };
@@ -184,7 +206,7 @@ export const reorderPlaylist = async (
 ): Promise<void> => {
     const res = await fetch(`${getApiUrl()}/devices/${deviceId}/playlist/reorder`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: getAuthHeaders({ "Content-Type": "application/json" }),
         body: JSON.stringify({ order }),
     });
     if (!res.ok) throw new Error("Chyba při ukládání pořadí playlistu");
