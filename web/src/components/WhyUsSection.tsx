@@ -6,7 +6,6 @@ import {
   RefreshCw,
   Target,
   FileCheck2,
-  Shield,
   Zap,
 } from "lucide-react";
 
@@ -45,18 +44,18 @@ export const WhyUsSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-24 relative bg-[#070a11] border-t border-white/5">
+    <section className="py-24 relative bg-surface/30 border-t border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold mb-4">
-            <Zap className="w-3.5 h-3.5" />
+          <div className="eyebrow mb-3 flex items-center justify-center gap-2">
+            <Zap className="w-3.5 h-3.5 text-[oklch(78%_0.13_84)]" />
             <span>Naše standardy</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
-            Proč spolupracovat s <span className="text-gradient">ALION Advert</span>?
+          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-white tracking-normal mb-4">
+            Proč spolupracovat s <span className="italic text-gold-gradient">ALION Advert</span>?
           </h2>
-          <p className="text-slate-400 text-base sm:text-lg">
-            Kombinujeme špičkový technologický hardware a software s individuálním přístupem
+          <p className="text-muted-foreground text-base sm:text-lg">
+            Kombinujeme špičkový hardware a software s individuálním přístupem
             ke každému partnerovi i inzerentovi.
           </p>
         </div>
@@ -67,16 +66,16 @@ export const WhyUsSection: React.FC = () => {
             return (
               <div
                 key={idx}
-                className="glass-card p-7 border-white/10 flex flex-col justify-between hover:border-cyan-500/30 transition-all group"
+                className="glass-card bg-surface p-8 border-border flex flex-col justify-between hover:border-[oklch(78%_0.13_84)]/40 transition-all group"
               >
                 <div>
-                  <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-cyan-400 mb-5 group-hover:scale-110 transition-transform">
+                  <div className="w-12 h-12 rounded-xl bg-surface-elevated border border-border flex items-center justify-center text-[oklch(78%_0.13_84)] mb-5 group-hover:scale-110 transition-transform">
                     <BIcon className="w-6 h-6" />
                   </div>
                   <h3 className="text-lg font-bold text-white mb-2 tracking-tight">
                     {b.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
                     {b.desc}
                   </p>
                 </div>

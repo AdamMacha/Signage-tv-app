@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import confetti from "canvas-confetti";
 import {
-  Sparkles,
   Building2,
   Briefcase,
   CheckCircle2,
@@ -15,10 +14,6 @@ import {
   User,
   Globe,
   MapPin,
-  Coins,
-  MessageSquare,
-  Users,
-  Home,
 } from "lucide-react";
 import {
   AdvertiserFormData,
@@ -62,7 +57,6 @@ export const LeadFormsSection: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
-  // Posluchač na přepínání formuláře z CTA tlačítek
   useEffect(() => {
     const handleSwitch = (e: any) => {
       if (e.detail?.type) {
@@ -82,10 +76,10 @@ export const LeadFormsSection: React.FC = () => {
         particleCount: 80,
         spread: 70,
         origin: { y: 0.6 },
-        colors: ["#06b6d4", "#6366f1", "#10b981", "#ffffff"],
+        colors: ["#cfa751", "#e0ca8e", "#f7f6f2", "#000000"],
       });
     } catch {
-      // Graceful fallback if confetti fails
+      // Graceful fallback
     }
   };
 
@@ -168,26 +162,26 @@ export const LeadFormsSection: React.FC = () => {
   };
 
   return (
-    <section id="lead-forms" className="py-24 relative bg-[#06080d] border-t border-white/5">
+    <section id="lead-forms" className="py-24 relative bg-surface/20 border-t border-border">
       {/* Background ambient light */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-gradient-to-tr from-cyan-600/10 via-indigo-600/10 to-transparent blur-[160px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-[oklch(78%_0.13_84)]/8 blur-[180px] rounded-full pointer-events-none" />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold mb-4">
-            <Send className="w-3.5 h-3.5" />
+          <div className="eyebrow mb-3 flex items-center justify-center gap-2">
+            <Send className="w-3.5 h-3.5 text-[oklch(78%_0.13_84)]" />
             <span>Nezávazný kontakt</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
-            Začněme spolupracovat ještě <span className="text-gradient">dnes</span>
+          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-white tracking-normal mb-4">
+            Začněme spolupracovat ještě <span className="italic text-gold-gradient">dnes</span>
           </h2>
-          <p className="text-slate-400 text-sm sm:text-base">
+          <p className="text-muted-foreground text-sm sm:text-base">
             Vyberte, zda chcete propagovat svou firmu, nebo nabídnout prostor pro obrazovku.
             Odpovíme vám do 24 hodin s konkrétní kalkulací.
           </p>
 
           {/* Tab Switcher */}
-          <div className="mt-8 inline-flex p-1.5 rounded-2xl bg-slate-900/90 border border-white/10 shadow-xl backdrop-blur-xl">
+          <div className="mt-8 inline-flex p-1.5 rounded-sm bg-surface-elevated border border-border shadow-xl backdrop-blur-xl">
             <button
               type="button"
               onClick={() => {
@@ -196,13 +190,13 @@ export const LeadFormsSection: React.FC = () => {
                 setErrorMessage(null);
                 setFieldErrors({});
               }}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+              className={`flex items-center gap-2 px-6 py-2.5 rounded-none text-xs font-mono uppercase tracking-wider font-semibold transition-all cursor-pointer ${
                 activeTab === "advertiser"
-                  ? "bg-gradient-to-r from-cyan-500 to-indigo-600 text-white shadow-lg shadow-cyan-500/25"
-                  : "text-slate-400 hover:text-white"
+                  ? "bg-[oklch(78%_0.13_84)] text-black shadow-md"
+                  : "text-muted-foreground hover:text-white"
               }`}
             >
-              <Briefcase className="w-4 h-4" />
+              <Briefcase className="w-3.5 h-3.5" />
               <span>Chci inzerovat</span>
             </button>
 
@@ -214,36 +208,36 @@ export const LeadFormsSection: React.FC = () => {
                 setErrorMessage(null);
                 setFieldErrors({});
               }}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+              className={`flex items-center gap-2 px-6 py-2.5 rounded-none text-xs font-mono uppercase tracking-wider font-semibold transition-all cursor-pointer ${
                 activeTab === "venue"
-                  ? "bg-gradient-to-r from-indigo-600 to-cyan-500 text-white shadow-lg shadow-indigo-500/25"
-                  : "text-slate-400 hover:text-white"
+                  ? "bg-[oklch(78%_0.13_84)] text-black shadow-md"
+                  : "text-muted-foreground hover:text-white"
               }`}
             >
-              <Building2 className="w-4 h-4" />
-              <span>Chci nabídnout prostor</span>
+              <Building2 className="w-3.5 h-3.5" />
+              <span>Nabídnout prostor</span>
             </button>
           </div>
         </div>
 
         {/* Form Container */}
-        <div className="glass-panel p-6 sm:p-10 border-white/15 shadow-2xl relative overflow-hidden">
+        <div className="glass-panel bg-surface p-6 sm:p-10 border-border shadow-2xl relative overflow-hidden">
           {success ? (
             /* Success State */
             <div className="py-12 text-center flex flex-col items-center justify-center animate-in fade-in zoom-in-95 duration-500">
-              <div className="w-16 h-16 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-6 shadow-xl shadow-emerald-500/20">
+              <div className="w-16 h-16 rounded-full bg-[oklch(78%_0.13_84)]/15 border border-[oklch(78%_0.13_84)]/30 flex items-center justify-center text-[oklch(78%_0.13_84)] mb-6 shadow-xl">
                 <CheckCircle2 className="w-8 h-8" />
               </div>
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-white mb-2 tracking-tight">
+              <h3 className="font-display text-3xl sm:text-4xl font-medium text-white mb-2 tracking-normal">
                 Děkujeme za poptávku!
               </h3>
-              <p className="text-slate-300 text-sm sm:text-base max-w-md mx-auto mb-8">
+              <p className="text-muted-foreground text-sm sm:text-base max-w-md mx-auto mb-8">
                 Vaše údaje jsme v pořádku přijali. Náš specialista vás bude kontaktovat
                 nejpozději do 24 hodin s nezávaznou nabídkou.
               </p>
               <button
                 onClick={() => setSuccess(false)}
-                className="px-6 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold border border-white/10 transition"
+                className="px-6 py-3 rounded-none bg-surface-elevated hover:bg-surface text-white text-xs uppercase tracking-widest font-semibold border border-border transition"
               >
                 Odeslat další poptávku
               </button>
@@ -252,7 +246,7 @@ export const LeadFormsSection: React.FC = () => {
             /* Forms */
             <div>
               {errorMessage && (
-                <div className="mb-6 p-4 rounded-xl bg-rose-500/10 border border-rose-500/25 text-rose-400 text-xs flex items-center gap-2.5">
+                <div className="mb-6 p-4 rounded-lg bg-rose-500/10 border border-rose-500/25 text-rose-400 text-xs flex items-center gap-2.5">
                   <AlertCircle className="w-4 h-4 shrink-0" />
                   <span>{errorMessage}</span>
                 </div>
@@ -261,12 +255,12 @@ export const LeadFormsSection: React.FC = () => {
               {activeTab === "advertiser" ? (
                 /* ── FORM 1: Inzerent ── */
                 <form onSubmit={handleAdvertiserSubmit} className="space-y-5">
-                  <div className="border-b border-white/10 pb-4 mb-6">
-                    <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                      <Briefcase className="w-5 h-5 text-cyan-400" />
+                  <div className="border-b border-border/60 pb-4 mb-6">
+                    <h3 className="font-display text-2xl font-medium text-white flex items-center gap-2">
+                      <Briefcase className="w-5 h-5 text-[oklch(78%_0.13_84)]" />
                       Poptávka reklamní kampaně
                     </h3>
-                    <p className="text-xs text-slate-400">
+                    <p className="text-xs text-muted-foreground font-sans">
                       Vyplňte základní informace a připravíme vám individuální plán vysílání.
                     </p>
                   </div>
@@ -274,7 +268,7 @@ export const LeadFormsSection: React.FC = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     {/* Jméno */}
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                      <label className="block text-xs font-semibold text-slate-300 mb-1.5 font-mono">
                         Jméno a příjmení *
                       </label>
                       <div className="relative">
@@ -285,11 +279,11 @@ export const LeadFormsSection: React.FC = () => {
                           value={advForm.name}
                           onChange={(e) => setAdvForm({ ...advForm, name: e.target.value })}
                           placeholder="Jan Novák"
-                          className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#0d1320] border border-white/10 text-white placeholder-slate-600 text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition"
+                          className="w-full pl-10 pr-4 py-2.5 rounded-sm bg-surface-elevated border border-border text-white placeholder-slate-600 text-sm focus:outline-none focus:border-[oklch(78%_0.13_84)] focus:ring-1 focus:ring-[oklch(78%_0.13_84)] transition"
                         />
                       </div>
                       {fieldErrors["name"] && (
-                        <span className="text-[11px] text-rose-400 mt-1 block">
+                        <span className="text-[11px] text-rose-400 mt-1 block font-mono">
                           {fieldErrors["name"]}
                         </span>
                       )}
@@ -297,7 +291,7 @@ export const LeadFormsSection: React.FC = () => {
 
                     {/* Firma */}
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                      <label className="block text-xs font-semibold text-slate-300 mb-1.5 font-mono">
                         Název firmy / Značka *
                       </label>
                       <div className="relative">
@@ -308,11 +302,11 @@ export const LeadFormsSection: React.FC = () => {
                           value={advForm.company}
                           onChange={(e) => setAdvForm({ ...advForm, company: e.target.value })}
                           placeholder="Např. ACME Gastro s.r.o."
-                          className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#0d1320] border border-white/10 text-white placeholder-slate-600 text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition"
+                          className="w-full pl-10 pr-4 py-2.5 rounded-sm bg-surface-elevated border border-border text-white placeholder-slate-600 text-sm focus:outline-none focus:border-[oklch(78%_0.13_84)] focus:ring-1 focus:ring-[oklch(78%_0.13_84)] transition"
                         />
                       </div>
                       {fieldErrors["company"] && (
-                        <span className="text-[11px] text-rose-400 mt-1 block">
+                        <span className="text-[11px] text-rose-400 mt-1 block font-mono">
                           {fieldErrors["company"]}
                         </span>
                       )}
@@ -320,7 +314,7 @@ export const LeadFormsSection: React.FC = () => {
 
                     {/* E-mail */}
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                      <label className="block text-xs font-semibold text-slate-300 mb-1.5 font-mono">
                         Firemní e-mail *
                       </label>
                       <div className="relative">
@@ -331,11 +325,11 @@ export const LeadFormsSection: React.FC = () => {
                           value={advForm.email}
                           onChange={(e) => setAdvForm({ ...advForm, email: e.target.value })}
                           placeholder="novak@firma.cz"
-                          className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#0d1320] border border-white/10 text-white placeholder-slate-600 text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition"
+                          className="w-full pl-10 pr-4 py-2.5 rounded-sm bg-surface-elevated border border-border text-white placeholder-slate-600 text-sm focus:outline-none focus:border-[oklch(78%_0.13_84)] focus:ring-1 focus:ring-[oklch(78%_0.13_84)] transition"
                         />
                       </div>
                       {fieldErrors["email"] && (
-                        <span className="text-[11px] text-rose-400 mt-1 block">
+                        <span className="text-[11px] text-rose-400 mt-1 block font-mono">
                           {fieldErrors["email"]}
                         </span>
                       )}
@@ -343,7 +337,7 @@ export const LeadFormsSection: React.FC = () => {
 
                     {/* Telefon */}
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                      <label className="block text-xs font-semibold text-slate-300 mb-1.5 font-mono">
                         Telefonní číslo *
                       </label>
                       <div className="relative">
@@ -354,11 +348,11 @@ export const LeadFormsSection: React.FC = () => {
                           value={advForm.phone}
                           onChange={(e) => setAdvForm({ ...advForm, phone: e.target.value })}
                           placeholder="+420 777 123 456"
-                          className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#0d1320] border border-white/10 text-white placeholder-slate-600 text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition"
+                          className="w-full pl-10 pr-4 py-2.5 rounded-sm bg-surface-elevated border border-border text-white placeholder-slate-600 text-sm focus:outline-none focus:border-[oklch(78%_0.13_84)] focus:ring-1 focus:ring-[oklch(78%_0.13_84)] transition"
                         />
                       </div>
                       {fieldErrors["phone"] && (
-                        <span className="text-[11px] text-rose-400 mt-1 block">
+                        <span className="text-[11px] text-rose-400 mt-1 block font-mono">
                           {fieldErrors["phone"]}
                         </span>
                       )}
@@ -366,7 +360,7 @@ export const LeadFormsSection: React.FC = () => {
 
                     {/* Web */}
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                      <label className="block text-xs font-semibold text-slate-300 mb-1.5 font-mono">
                         Webové stránky (volitelné)
                       </label>
                       <div className="relative">
@@ -376,14 +370,14 @@ export const LeadFormsSection: React.FC = () => {
                           value={advForm.website}
                           onChange={(e) => setAdvForm({ ...advForm, website: e.target.value })}
                           placeholder="https://vasedomena.cz"
-                          className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#0d1320] border border-white/10 text-white placeholder-slate-600 text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition"
+                          className="w-full pl-10 pr-4 py-2.5 rounded-sm bg-surface-elevated border border-border text-white placeholder-slate-600 text-sm focus:outline-none focus:border-[oklch(78%_0.13_84)] focus:ring-1 focus:ring-[oklch(78%_0.13_84)] transition"
                         />
                       </div>
                     </div>
 
                     {/* Lokalita */}
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                      <label className="block text-xs font-semibold text-slate-300 mb-1.5 font-mono">
                         Cílová lokalita / město *
                       </label>
                       <div className="relative">
@@ -394,11 +388,11 @@ export const LeadFormsSection: React.FC = () => {
                           value={advForm.location}
                           onChange={(e) => setAdvForm({ ...advForm, location: e.target.value })}
                           placeholder="Např. Praha, Brno, celá ČR..."
-                          className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#0d1320] border border-white/10 text-white placeholder-slate-600 text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition"
+                          className="w-full pl-10 pr-4 py-2.5 rounded-sm bg-surface-elevated border border-border text-white placeholder-slate-600 text-sm focus:outline-none focus:border-[oklch(78%_0.13_84)] focus:ring-1 focus:ring-[oklch(78%_0.13_84)] transition"
                         />
                       </div>
                       {fieldErrors["location"] && (
-                        <span className="text-[11px] text-rose-400 mt-1 block">
+                        <span className="text-[11px] text-rose-400 mt-1 block font-mono">
                           {fieldErrors["location"]}
                         </span>
                       )}
@@ -407,7 +401,7 @@ export const LeadFormsSection: React.FC = () => {
 
                   {/* Rozpočet */}
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                    <label className="block text-xs font-semibold text-slate-300 mb-1.5 font-mono">
                       Přibližný měsíční rozpočet *
                     </label>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -428,10 +422,10 @@ export const LeadFormsSection: React.FC = () => {
                               budget: budgetOption as AdvertiserFormData["budget"],
                             })
                           }
-                          className={`p-2.5 rounded-xl text-xs font-semibold border text-center transition cursor-pointer ${
+                          className={`p-2.5 rounded-sm text-xs font-mono font-semibold border text-center transition cursor-pointer ${
                             advForm.budget === budgetOption
-                              ? "bg-cyan-500/15 border-cyan-500 text-cyan-300 shadow-sm"
-                              : "bg-[#0d1320] border-white/10 text-slate-400 hover:border-white/20 hover:text-white"
+                              ? "bg-[oklch(78%_0.13_84)]/15 border-[oklch(78%_0.13_84)] text-[oklch(78%_0.13_84)] shadow-sm"
+                              : "bg-surface-elevated border-border text-muted-foreground hover:border-border/80 hover:text-white"
                           }`}
                         >
                           {budgetOption}
@@ -442,7 +436,7 @@ export const LeadFormsSection: React.FC = () => {
 
                   {/* Zpráva */}
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                    <label className="block text-xs font-semibold text-slate-300 mb-1.5 font-mono">
                       Představa o kampani / Poznámka (volitelné)
                     </label>
                     <textarea
@@ -450,14 +444,14 @@ export const LeadFormsSection: React.FC = () => {
                       value={advForm.message}
                       onChange={(e) => setAdvForm({ ...advForm, message: e.target.value })}
                       placeholder="Máte už hotové video, nebo potřebujete spot vytvořit? Kdy by měla kampaň odstartovat?"
-                      className="w-full p-3.5 rounded-xl bg-[#0d1320] border border-white/10 text-white placeholder-slate-600 text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition"
+                      className="w-full p-3.5 rounded-sm bg-surface-elevated border border-border text-white placeholder-slate-600 text-sm focus:outline-none focus:border-[oklch(78%_0.13_84)] focus:ring-1 focus:ring-[oklch(78%_0.13_84)] transition"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white font-bold text-sm shadow-xl shadow-cyan-500/25 hover:shadow-cyan-500/40 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full py-4 px-6 rounded-none bg-[oklch(78%_0.13_84)] hover:bg-[oklch(85%_0.09_85)] text-black font-bold text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-[oklch(78%_0.13_84)]/20"
                   >
                     {loading ? (
                       <>
@@ -475,12 +469,12 @@ export const LeadFormsSection: React.FC = () => {
               ) : (
                 /* ── FORM 2: Nabídka prostoru ── */
                 <form onSubmit={handleVenueSubmit} className="space-y-5">
-                  <div className="border-b border-white/10 pb-4 mb-6">
-                    <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                      <Building2 className="w-5 h-5 text-indigo-400" />
+                  <div className="border-b border-border/60 pb-4 mb-6">
+                    <h3 className="font-display text-2xl font-medium text-white flex items-center gap-2">
+                      <Building2 className="w-5 h-5 text-[oklch(78%_0.13_84)]" />
                       Nabídka prostoru pro reklamní obrazovku
                     </h3>
-                    <p className="text-xs text-slate-400">
+                    <p className="text-xs text-muted-foreground font-sans">
                       Umístíme k vám obrazovku a budeme vám vyplácet pravidelnou měsíční provizi.
                     </p>
                   </div>
@@ -488,7 +482,7 @@ export const LeadFormsSection: React.FC = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     {/* Jméno */}
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                      <label className="block text-xs font-semibold text-slate-300 mb-1.5 font-mono">
                         Jméno a příjmení kontaktní osoby *
                       </label>
                       <div className="relative">
@@ -499,11 +493,11 @@ export const LeadFormsSection: React.FC = () => {
                           value={venueForm.name}
                           onChange={(e) => setVenueForm({ ...venueForm, name: e.target.value })}
                           placeholder="Jan Novák"
-                          className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#0d1320] border border-white/10 text-white placeholder-slate-600 text-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"
+                          className="w-full pl-10 pr-4 py-2.5 rounded-sm bg-surface-elevated border border-border text-white placeholder-slate-600 text-sm focus:outline-none focus:border-[oklch(78%_0.13_84)] focus:ring-1 focus:ring-[oklch(78%_0.13_84)] transition"
                         />
                       </div>
                       {fieldErrors["name"] && (
-                        <span className="text-[11px] text-rose-400 mt-1 block">
+                        <span className="text-[11px] text-rose-400 mt-1 block font-mono">
                           {fieldErrors["name"]}
                         </span>
                       )}
@@ -511,7 +505,7 @@ export const LeadFormsSection: React.FC = () => {
 
                     {/* Provozovna */}
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                      <label className="block text-xs font-semibold text-slate-300 mb-1.5 font-mono">
                         Název provozovny / podniku *
                       </label>
                       <div className="relative">
@@ -522,11 +516,11 @@ export const LeadFormsSection: React.FC = () => {
                           value={venueForm.company}
                           onChange={(e) => setVenueForm({ ...venueForm, company: e.target.value })}
                           placeholder="Např. Kavárna Máj"
-                          className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#0d1320] border border-white/10 text-white placeholder-slate-600 text-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"
+                          className="w-full pl-10 pr-4 py-2.5 rounded-sm bg-surface-elevated border border-border text-white placeholder-slate-600 text-sm focus:outline-none focus:border-[oklch(78%_0.13_84)] focus:ring-1 focus:ring-[oklch(78%_0.13_84)] transition"
                         />
                       </div>
                       {fieldErrors["company"] && (
-                        <span className="text-[11px] text-rose-400 mt-1 block">
+                        <span className="text-[11px] text-rose-400 mt-1 block font-mono">
                           {fieldErrors["company"]}
                         </span>
                       )}
@@ -534,7 +528,7 @@ export const LeadFormsSection: React.FC = () => {
 
                     {/* E-mail */}
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                      <label className="block text-xs font-semibold text-slate-300 mb-1.5 font-mono">
                         E-mailová adresa *
                       </label>
                       <div className="relative">
@@ -545,11 +539,11 @@ export const LeadFormsSection: React.FC = () => {
                           value={venueForm.email}
                           onChange={(e) => setVenueForm({ ...venueForm, email: e.target.value })}
                           placeholder="kontakt@kavarnamaj.cz"
-                          className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#0d1320] border border-white/10 text-white placeholder-slate-600 text-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"
+                          className="w-full pl-10 pr-4 py-2.5 rounded-sm bg-surface-elevated border border-border text-white placeholder-slate-600 text-sm focus:outline-none focus:border-[oklch(78%_0.13_84)] focus:ring-1 focus:ring-[oklch(78%_0.13_84)] transition"
                         />
                       </div>
                       {fieldErrors["email"] && (
-                        <span className="text-[11px] text-rose-400 mt-1 block">
+                        <span className="text-[11px] text-rose-400 mt-1 block font-mono">
                           {fieldErrors["email"]}
                         </span>
                       )}
@@ -557,7 +551,7 @@ export const LeadFormsSection: React.FC = () => {
 
                     {/* Telefon */}
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                      <label className="block text-xs font-semibold text-slate-300 mb-1.5 font-mono">
                         Telefonní číslo *
                       </label>
                       <div className="relative">
@@ -568,11 +562,11 @@ export const LeadFormsSection: React.FC = () => {
                           value={venueForm.phone}
                           onChange={(e) => setVenueForm({ ...venueForm, phone: e.target.value })}
                           placeholder="+420 602 123 456"
-                          className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#0d1320] border border-white/10 text-white placeholder-slate-600 text-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"
+                          className="w-full pl-10 pr-4 py-2.5 rounded-sm bg-surface-elevated border border-border text-white placeholder-slate-600 text-sm focus:outline-none focus:border-[oklch(78%_0.13_84)] focus:ring-1 focus:ring-[oklch(78%_0.13_84)] transition"
                         />
                       </div>
                       {fieldErrors["phone"] && (
-                        <span className="text-[11px] text-rose-400 mt-1 block">
+                        <span className="text-[11px] text-rose-400 mt-1 block font-mono">
                           {fieldErrors["phone"]}
                         </span>
                       )}
@@ -580,7 +574,7 @@ export const LeadFormsSection: React.FC = () => {
 
                     {/* Adresa */}
                     <div className="sm:col-span-2">
-                      <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                      <label className="block text-xs font-semibold text-slate-300 mb-1.5 font-mono">
                         Přesná adresa / lokalita prostoru *
                       </label>
                       <div className="relative">
@@ -591,11 +585,11 @@ export const LeadFormsSection: React.FC = () => {
                           value={venueForm.address}
                           onChange={(e) => setVenueForm({ ...venueForm, address: e.target.value })}
                           placeholder="Ulice, číslo popisné, PSČ a město"
-                          className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#0d1320] border border-white/10 text-white placeholder-slate-600 text-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"
+                          className="w-full pl-10 pr-4 py-2.5 rounded-sm bg-surface-elevated border border-border text-white placeholder-slate-600 text-sm focus:outline-none focus:border-[oklch(78%_0.13_84)] focus:ring-1 focus:ring-[oklch(78%_0.13_84)] transition"
                         />
                       </div>
                       {fieldErrors["address"] && (
-                        <span className="text-[11px] text-rose-400 mt-1 block">
+                        <span className="text-[11px] text-rose-400 mt-1 block font-mono">
                           {fieldErrors["address"]}
                         </span>
                       )}
@@ -604,7 +598,7 @@ export const LeadFormsSection: React.FC = () => {
 
                   {/* Typ prostoru */}
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                    <label className="block text-xs font-semibold text-slate-300 mb-1.5 font-mono">
                       Typ prostoru / provozovny *
                     </label>
                     <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
@@ -629,10 +623,10 @@ export const LeadFormsSection: React.FC = () => {
                               venueType: type as VenueHostFormData["venueType"],
                             })
                           }
-                          className={`p-2.5 rounded-xl text-xs font-semibold border text-center transition cursor-pointer ${
+                          className={`p-2.5 rounded-sm text-xs font-mono font-semibold border text-center transition cursor-pointer ${
                             venueForm.venueType === type
-                              ? "bg-indigo-500/20 border-indigo-500 text-indigo-300"
-                              : "bg-[#0d1320] border-white/10 text-slate-400 hover:border-white/20 hover:text-white"
+                              ? "bg-[oklch(78%_0.13_84)]/20 border-[oklch(78%_0.13_84)] text-[oklch(78%_0.13_84)]"
+                              : "bg-surface-elevated border-border text-muted-foreground hover:border-border/80 hover:text-white"
                           }`}
                         >
                           {type}
@@ -644,13 +638,13 @@ export const LeadFormsSection: React.FC = () => {
                   {/* Návštěvnost a Vlastnictví */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                      <label className="block text-xs font-semibold text-slate-300 mb-1.5 font-mono">
                         Odhadovaná denní návštěvnost *
                       </label>
                       <select
                         value={venueForm.footTraffic}
                         onChange={(e) => setVenueForm({ ...venueForm, footTraffic: e.target.value })}
-                        className="w-full p-2.5 rounded-xl bg-[#0d1320] border border-white/10 text-white text-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"
+                        className="w-full p-2.5 rounded-sm bg-surface-elevated border border-border text-white text-sm focus:outline-none focus:border-[oklch(78%_0.13_84)] focus:ring-1 focus:ring-[oklch(78%_0.13_84)] transition font-mono"
                       >
                         <option value="Do 100 lidí denně">Do 100 lidí denně</option>
                         <option value="100–300 lidí denně">100–300 lidí denně</option>
@@ -660,7 +654,7 @@ export const LeadFormsSection: React.FC = () => {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                      <label className="block text-xs font-semibold text-slate-300 mb-1.5 font-mono">
                         Vlastnický vztah k prostoru *
                       </label>
                       <select
@@ -671,7 +665,7 @@ export const LeadFormsSection: React.FC = () => {
                             ownership: e.target.value as VenueHostFormData["ownership"],
                           })
                         }
-                        className="w-full p-2.5 rounded-xl bg-[#0d1320] border border-white/10 text-white text-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"
+                        className="w-full p-2.5 rounded-sm bg-surface-elevated border border-border text-white text-sm focus:outline-none focus:border-[oklch(78%_0.13_84)] focus:ring-1 focus:ring-[oklch(78%_0.13_84)] transition font-mono"
                       >
                         <option value="Vlastní prostor">Vlastní prostor</option>
                         <option value="Dlouhodobý pronájem">Dlouhodobý pronájem</option>
@@ -681,7 +675,7 @@ export const LeadFormsSection: React.FC = () => {
 
                   {/* Zpráva */}
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                    <label className="block text-xs font-semibold text-slate-300 mb-1.5 font-mono">
                       Doplňující informace o prostoru (volitelné)
                     </label>
                     <textarea
@@ -689,14 +683,14 @@ export const LeadFormsSection: React.FC = () => {
                       value={venueForm.message}
                       onChange={(e) => setVenueForm({ ...venueForm, message: e.target.value })}
                       placeholder="Popište umístění, kde by mohla obrazovka viset (např. za barem, u recepce, v čekací zóně)..."
-                      className="w-full p-3.5 rounded-xl bg-[#0d1320] border border-white/10 text-white placeholder-slate-600 text-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"
+                      className="w-full p-3.5 rounded-sm bg-surface-elevated border border-border text-white placeholder-slate-600 text-sm focus:outline-none focus:border-[oklch(78%_0.13_84)] focus:ring-1 focus:ring-[oklch(78%_0.13_84)] transition"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-500 hover:to-cyan-500 text-white font-bold text-sm shadow-xl shadow-indigo-500/25 hover:shadow-indigo-500/40 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full py-4 px-6 rounded-none bg-[oklch(78%_0.13_84)] hover:bg-[oklch(85%_0.09_85)] text-black font-bold text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-[oklch(78%_0.13_84)]/20"
                   >
                     {loading ? (
                       <>

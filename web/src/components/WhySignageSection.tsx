@@ -5,8 +5,6 @@ import {
   RotateCw,
   Sliders,
   Sparkles,
-  Ban,
-  Clock,
   Zap,
 } from "lucide-react";
 
@@ -55,16 +53,16 @@ export const WhySignageSection: React.FC = () => {
   ];
 
   return (
-    <section id="proc-digital-signage" className="py-24 relative bg-[#070a11]">
+    <section id="proc-digital-signage" className="py-24 relative bg-surface/40 border-t border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold mb-4">
-            <span>Budoucnost outdoorové reklamy</span>
+          <div className="eyebrow mb-3">
+            Budoucnost outdoorové reklamy
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
-            Proč zvolit <span className="text-gradient">digital signage</span>?
+          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-white tracking-normal mb-4">
+            Proč zvolit <span className="italic text-gold-gradient">digital signage</span>?
           </h2>
-          <p className="text-slate-400 text-base sm:text-lg">
+          <p className="text-muted-foreground text-base sm:text-lg">
             Srovnání s běžnou tiskovou a online reklamou: maximální dopad tam, kde se lidé
             skutečně pohybují a rozhodují o nákupech.
           </p>
@@ -77,16 +75,16 @@ export const WhySignageSection: React.FC = () => {
             return (
               <div
                 key={idx}
-                className={`glass-card p-8 flex flex-col justify-between border-white/10 ${
-                  isLarge ? "lg:col-span-2 lg:bg-gradient-to-br lg:from-cyan-950/20 lg:to-[#0e1424]" : ""
+                className={`glass-card bg-surface p-8 flex flex-col justify-between border-border hover:border-[oklch(78%_0.13_84)]/40 ${
+                  isLarge ? "lg:col-span-2 lg:bg-gradient-to-br lg:from-[#21201f] lg:to-surface" : ""
                 }`}
               >
                 <div>
                   <div className="flex items-center justify-between mb-6">
-                    <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-cyan-400">
+                    <div className="w-12 h-12 rounded-xl bg-surface-elevated border border-border flex items-center justify-center text-[oklch(78%_0.13_84)]">
                       <Icon className="w-6 h-6" />
                     </div>
-                    <span className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-white/5 text-slate-300 border border-white/10">
+                    <span className="px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider font-semibold bg-[oklch(78%_0.13_84)]/10 text-[oklch(78%_0.13_84)] border border-[oklch(78%_0.13_84)]/25">
                       {item.badge}
                     </span>
                   </div>
@@ -94,16 +92,16 @@ export const WhySignageSection: React.FC = () => {
                   <h3 className="text-xl font-bold text-white mb-1.5 tracking-tight">
                     {item.title}
                   </h3>
-                  <p className="text-xs font-semibold text-cyan-400/90 mb-4">
+                  <p className="text-xs font-semibold text-[oklch(78%_0.13_84)] mb-4 font-mono">
                     {item.subtitle}
                   </p>
-                  <p className="text-sm text-slate-300 leading-relaxed">
+                  <p className="text-sm text-muted-foreground leading-relaxed">
                     {item.description}
                   </p>
                 </div>
 
-                <div className="mt-8 pt-4 border-t border-white/5 flex items-center gap-2 text-xs text-slate-500">
-                  <Zap className="w-3.5 h-3.5 text-cyan-400" />
+                <div className="mt-8 pt-4 border-t border-border/40 flex items-center gap-2 text-xs text-muted-foreground">
+                  <Zap className="w-3.5 h-3.5 text-[oklch(78%_0.13_84)]" />
                   <span>ALION Signage Smart Delivery</span>
                 </div>
               </div>

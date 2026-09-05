@@ -12,7 +12,6 @@ import {
   Car,
   ShoppingBag,
   Sparkles,
-  TrendingUp,
   Coins,
 } from "lucide-react";
 
@@ -22,10 +21,10 @@ export const AudienceSection: React.FC = () => {
     { name: "Fitness & Gyms", icon: Dumbbell },
     { name: "Hotely & Penziony", icon: Hotel },
     { name: "Čekárny & Kliniky", icon: Stethoscope },
-    { name: "Autoservisy & Pneuservisy", icon: Car },
-    { name: "Salony & Barber shopy", icon: Sparkles },
+    { name: "Autoservisy", icon: Car },
+    { name: "Salony & Barber", icon: Sparkles },
     { name: "Obchody & Showroomy", icon: ShoppingBag },
-    { name: "Recepce & Kanceláře", icon: Building2 },
+    { name: "Recepce & Office", icon: Building2 },
   ];
 
   const scrollToForms = (targetType: "advertiser" | "venue") => {
@@ -46,58 +45,58 @@ export const AudienceSection: React.FC = () => {
   };
 
   return (
-    <section id="pro-koho" className="py-24 relative border-t border-white/5">
+    <section id="pro-koho" className="py-24 relative border-t border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold mb-4">
-            <span>Dvě strany jedné sítě</span>
+          <div className="eyebrow mb-3">
+            Dvě strany jedné sítě
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
-            Pro koho je <span className="text-gradient">ALION Advert</span>?
+          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-white tracking-normal mb-4">
+            Pro koho je <span className="italic text-gold-gradient">ALION Advert</span>?
           </h2>
-          <p className="text-slate-400 text-base sm:text-lg">
-            Ať už chcete získat nové platící zákazníky, nebo zhodnotit prostor vaší provozovny,
-            máme pro vás řešení.
+          <p className="text-muted-foreground text-base sm:text-lg">
+            Ať už chcete získat novou vlnu zákazníků, nebo zhodnotit prostor vaší provozovny,
+            máme pro vás efektivní a transparentní řešení.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Card A: Inzerenti */}
-          <div className="glass-panel p-8 sm:p-12 relative overflow-hidden flex flex-col justify-between border-cyan-500/20 hover:border-cyan-500/40 transition-all duration-300 group">
-            <div className="absolute top-0 right-0 w-80 h-80 bg-cyan-500/10 blur-[100px] pointer-events-none rounded-full" />
+          <div className="glass-panel p-8 sm:p-12 relative overflow-hidden flex flex-col justify-between border-[oklch(78%_0.13_84)]/20 hover:border-[oklch(78%_0.13_84)]/40 transition-all duration-300 group bg-surface">
+            <div className="absolute top-0 right-0 w-80 h-80 bg-[oklch(78%_0.13_84)]/5 blur-[100px] pointer-events-none rounded-full" />
 
             <div>
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/25 flex items-center justify-center text-cyan-400">
+                <div className="w-12 h-12 rounded-xl bg-[oklch(78%_0.13_84)]/10 border border-[oklch(78%_0.13_84)]/25 flex items-center justify-center text-[oklch(78%_0.13_84)]">
                   <Briefcase className="w-6 h-6" />
                 </div>
                 <div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-cyan-400">
+                  <span className="eyebrow !text-[10px] block mb-1">
                     Pro firmy a inzerenty
                   </span>
-                  <h3 className="text-2xl font-bold text-white tracking-tight">
+                  <h3 className="font-display text-2xl sm:text-3xl font-medium text-white tracking-normal">
                     Chcete být vidět tam, kde jsou zákazníci?
                   </h3>
                 </div>
               </div>
 
-              <p className="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-6">
                 Dostaňte svou firmu, produkt nebo službu na obrazovky přímo v místech,
                 kde se vaši cíloví zákazníci denně zdržují. Zvyšte povědomí o své značce
-                a přiveďte nové klienty bez plýtvání rozpočtem.
+                a přiveďte nové klienty bez plýtvání rozpočtem na online bannerovou slepotu.
               </p>
 
               <div className="space-y-3 mb-8">
                 <div className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300">
-                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-2 shrink-0" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-[oklch(78%_0.13_84)] mt-2 shrink-0" />
                   <span>Cílení na konkrétní města a typy provozoven (kavárny, fitness, hotely...)</span>
                 </div>
                 <div className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300">
-                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-2 shrink-0" />
-                  <span>Stovky přehrání denně v rotační smyčce ve vysokém rozlišení</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[oklch(78%_0.13_84)] mt-2 shrink-0" />
+                  <span>Stovky přehrání denně v rotační smyčce ve vysokém 4K rozlišení</span>
                 </div>
                 <div className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300">
-                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-2 shrink-0" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-[oklch(78%_0.13_84)] mt-2 shrink-0" />
                   <span>Flexibilní rozpočty i pro menší a střední lokální podniky</span>
                 </div>
               </div>
@@ -105,7 +104,7 @@ export const AudienceSection: React.FC = () => {
 
             <button
               onClick={() => scrollToForms("advertiser")}
-              className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white font-semibold text-sm shadow-lg shadow-cyan-500/20 transition flex items-center justify-center gap-2 cursor-pointer group-hover:shadow-cyan-500/35"
+              className="w-full sm:w-auto px-8 py-4 rounded-none bg-[oklch(78%_0.13_84)] hover:bg-[oklch(85%_0.09_85)] text-black font-semibold text-xs uppercase tracking-widest transition flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-[oklch(78%_0.13_84)]/15"
             >
               <span>Chci reklamní kampaň</span>
               <ArrowRight className="w-4 h-4" />
@@ -113,25 +112,25 @@ export const AudienceSection: React.FC = () => {
           </div>
 
           {/* Card B: Majitelé prostor */}
-          <div className="glass-panel p-8 sm:p-12 relative overflow-hidden flex flex-col justify-between border-indigo-500/20 hover:border-indigo-500/40 transition-all duration-300 group">
-            <div className="absolute top-0 right-0 w-80 h-80 bg-indigo-500/10 blur-[100px] pointer-events-none rounded-full" />
+          <div className="glass-panel p-8 sm:p-12 relative overflow-hidden flex flex-col justify-between border-border hover:border-[oklch(78%_0.13_84)]/40 transition-all duration-300 group bg-surface">
+            <div className="absolute top-0 right-0 w-80 h-80 bg-[oklch(78%_0.13_84)]/5 blur-[100px] pointer-events-none rounded-full" />
 
             <div>
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/25 flex items-center justify-center text-indigo-400">
+                <div className="w-12 h-12 rounded-xl bg-surface-elevated border border-border flex items-center justify-center text-[oklch(78%_0.13_84)]">
                   <Coins className="w-6 h-6" />
                 </div>
                 <div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-indigo-400">
-                    Pro majitele a provozovatele prostor
+                  <span className="eyebrow !text-[10px] block mb-1">
+                    Pro provozovatele prostor
                   </span>
-                  <h3 className="text-2xl font-bold text-white tracking-tight">
+                  <h3 className="font-display text-2xl sm:text-3xl font-medium text-white tracking-normal">
                     Máte místo, kde se denně pohybují lidé?
                   </h3>
                 </div>
               </div>
 
-              <p className="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-6">
                 Získejte pravidelný pasivní příjem. Umístíme k vám do provozovny moderní
                 televizní obrazovku, zajistíme kompletní instalaci i technický servis
                 a vy každý měsíc inkasujete provizi z běžící reklamy.
@@ -144,9 +143,9 @@ export const AudienceSection: React.FC = () => {
                   return (
                     <div
                       key={i}
-                      className="p-2.5 rounded-lg bg-white/5 border border-white/5 flex items-center gap-2 text-[11px] text-slate-300"
+                      className="p-2.5 rounded-lg bg-surface-elevated border border-border/60 flex items-center gap-2 text-[11px] text-slate-300"
                     >
-                      <VIcon className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
+                      <VIcon className="w-3.5 h-3.5 text-[oklch(78%_0.13_84)] shrink-0" />
                       <span className="truncate">{v.name}</span>
                     </div>
                   );
@@ -156,10 +155,10 @@ export const AudienceSection: React.FC = () => {
 
             <button
               onClick={() => scrollToForms("venue")}
-              className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 border border-white/10 hover:border-white/25 text-white font-semibold text-sm transition flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full sm:w-auto px-8 py-4 rounded-none bg-surface-elevated hover:bg-surface border border-border hover:border-[oklch(78%_0.13_84)]/50 text-[oklch(96%_0.01_80)] font-semibold text-xs uppercase tracking-widest transition flex items-center justify-center gap-2 cursor-pointer"
             >
               <span>Chci nabídnout prostor pro TV</span>
-              <ArrowRight className="w-4 h-4 text-slate-400" />
+              <ArrowRight className="w-4 h-4 text-[oklch(78%_0.13_84)]" />
             </button>
           </div>
         </div>

@@ -62,38 +62,38 @@ export const FAQSection: React.FC = () => {
       : faqs.filter((item) => item.category === activeCategory);
 
   return (
-    <section id="faq" className="py-24 relative bg-[#06080d] border-t border-white/5">
+    <section id="faq" className="py-24 relative bg-surface/30 border-t border-border">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold mb-4">
-            <HelpCircle className="w-3.5 h-3.5" />
+          <div className="eyebrow mb-3 flex items-center justify-center gap-2">
+            <HelpCircle className="w-3.5 h-3.5 text-[oklch(78%_0.13_84)]" />
             <span>Odpovědi na vaše otázky</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
-            Často kladené <span className="text-gradient">dotazy</span>
+          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-white tracking-normal mb-4">
+            Často kladené <span className="italic text-gold-gradient">dotazy</span>
           </h2>
-          <p className="text-slate-400 text-sm sm:text-base">
+          <p className="text-muted-foreground text-sm sm:text-base">
             Vše, co potřebujete vědět před zahájením kampaně nebo instalací obrazovky.
           </p>
 
           {/* Filter Pill Buttons */}
-          <div className="mt-8 flex items-center justify-center gap-2">
+          <div className="mt-8 flex items-center justify-center gap-2 font-mono">
             <button
               onClick={() => setActiveCategory("all")}
-              className={`px-4 py-2 rounded-xl text-xs font-semibold transition cursor-pointer ${
+              className={`px-4 py-2 rounded-sm text-xs font-semibold transition cursor-pointer ${
                 activeCategory === "all"
-                  ? "bg-white/10 text-white border border-white/20"
-                  : "text-slate-400 hover:text-white"
+                  ? "bg-[oklch(78%_0.13_84)] text-black"
+                  : "bg-surface-elevated text-muted-foreground hover:text-white border border-border"
               }`}
             >
               Všechny dotazy
             </button>
             <button
               onClick={() => setActiveCategory("advertiser")}
-              className={`px-4 py-2 rounded-xl text-xs font-semibold transition cursor-pointer flex items-center gap-1.5 ${
+              className={`px-4 py-2 rounded-sm text-xs font-semibold transition cursor-pointer flex items-center gap-1.5 ${
                 activeCategory === "advertiser"
-                  ? "bg-cyan-500/20 text-cyan-400 border border-cyan-500/30"
-                  : "text-slate-400 hover:text-white"
+                  ? "bg-[oklch(78%_0.13_84)] text-black"
+                  : "bg-surface-elevated text-muted-foreground hover:text-white border border-border"
               }`}
             >
               <Briefcase className="w-3.5 h-3.5" />
@@ -101,10 +101,10 @@ export const FAQSection: React.FC = () => {
             </button>
             <button
               onClick={() => setActiveCategory("venue")}
-              className={`px-4 py-2 rounded-xl text-xs font-semibold transition cursor-pointer flex items-center gap-1.5 ${
+              className={`px-4 py-2 rounded-sm text-xs font-semibold transition cursor-pointer flex items-center gap-1.5 ${
                 activeCategory === "venue"
-                  ? "bg-indigo-500/20 text-indigo-400 border border-indigo-500/30"
-                  : "text-slate-400 hover:text-white"
+                  ? "bg-[oklch(78%_0.13_84)] text-black"
+                  : "bg-surface-elevated text-muted-foreground hover:text-white border border-border"
               }`}
             >
               <Building2 className="w-3.5 h-3.5" />
@@ -120,18 +120,18 @@ export const FAQSection: React.FC = () => {
             return (
               <div
                 key={idx}
-                className="glass-card border-white/10 overflow-hidden transition-all duration-200"
+                className="glass-card bg-surface border-border overflow-hidden transition-all duration-200"
               >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : idx)}
                   className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 cursor-pointer focus:outline-none"
                 >
-                  <span className="text-sm sm:text-base font-bold text-white tracking-tight">
+                  <span className="text-sm sm:text-base font-medium text-white tracking-tight">
                     {faq.q}
                   </span>
                   <div
-                    className={`w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0 text-slate-400 transition-transform duration-300 ${
-                      isOpen ? "rotate-180 text-cyan-400 bg-cyan-500/10 border-cyan-500/30" : ""
+                    className={`w-8 h-8 rounded-sm bg-surface-elevated border border-border flex items-center justify-center shrink-0 text-muted-foreground transition-transform duration-300 ${
+                      isOpen ? "rotate-180 text-[oklch(78%_0.13_84)] border-[oklch(78%_0.13_84)]/40 bg-[oklch(78%_0.13_84)]/10" : ""
                     }`}
                   >
                     <ChevronDown className="w-4 h-4" />
@@ -139,7 +139,7 @@ export const FAQSection: React.FC = () => {
                 </button>
 
                 {isOpen && (
-                  <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-white/5 animate-in fade-in duration-300">
+                  <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-muted-foreground leading-relaxed border-t border-border/40 animate-in fade-in duration-300">
                     {faq.a}
                   </div>
                 )}

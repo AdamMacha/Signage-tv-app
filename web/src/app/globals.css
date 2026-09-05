@@ -1,19 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  --bg-primary: #06080d;
-  --bg-secondary: #0b0f17;
-  --bg-card: rgba(14, 19, 31, 0.65);
-  --bg-card-hover: rgba(20, 27, 43, 0.8);
-  --bg-input: #0f1522;
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-active: rgba(6, 182, 212, 0.4);
-  --accent-cyan: #06b6d4;
-  --accent-indigo: #6366f1;
-  --accent-emerald: #10b981;
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
+  --radius: 0.25rem;
+  --background: oklch(13% 0.005 60); /* #121211 deep warm carbon */
+  --foreground: oklch(96% 0.01 80);  /* #f7f6f2 warm bone white */
+  --surface: oklch(17% 0.006 60);     /* #1a1918 carbon surface */
+  --surface-elevated: oklch(21% 0.008 60); /* #242220 elevated surface */
+  --muted: oklch(22% 0.005 60);
+  --muted-foreground: oklch(65% 0.01 70);  /* #9f9c94 warm muted */
+  --border: oklch(28% 0.008 70 / 0.6);    /* subtle warm border */
+  --primary: oklch(78% 0.13 84);           /* Alion Aviation luxury gold */
+  --primary-foreground: oklch(13% 0.005 60);
+  --gold: oklch(78% 0.13 84);              /* #cfa751 */
+  --gold-soft: oklch(85% 0.09 85);         /* #e0ca8e */
+  --bone: oklch(94% 0.015 80);
+  --gradient-gold: linear-gradient(135deg, oklch(78% 0.13 84), oklch(65% 0.16 70));
 }
 
 html {
@@ -22,11 +23,38 @@ html {
 }
 
 body {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
   min-height: 100vh;
+}
+
+/* Custom Typography classes */
+.font-display {
+  font-family: var(--font-serif), "Cormorant Garamond", Georgia, serif;
+}
+
+.eyebrow {
+  font-family: var(--font-mono), "JetBrains Mono", monospace;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+/* Carbon Grid (as on Alion Aviation) */
+.carbon-grid {
+  background-image: linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Gold Divider */
+.gold-divider {
+  background: linear-gradient(90deg, transparent, var(--gold) 50%, transparent);
+  height: 1px;
 }
 
 /* Custom Scrollbar */
@@ -35,81 +63,78 @@ body {
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--bg-primary);
+  background: var(--background);
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #252422;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #383633;
 }
 
-/* Glassmorphism & Surface utilities */
+/* Glassmorphism & Surface utilities aligned with Alion Aviation */
+.bg-surface {
+  background-color: var(--surface);
+}
+
+.bg-surface-elevated {
+  background-color: var(--surface-elevated);
+}
+
 .glass-panel {
-  background: var(--bg-card);
+  background: rgba(23, 22, 21, 0.72);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--border-subtle);
-  border-radius: 20px;
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8);
 }
 
 .glass-card {
-  background: rgba(16, 22, 36, 0.55);
+  background: rgba(26, 25, 24, 0.65);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--border-subtle);
-  border-radius: 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-card:hover {
-  background: rgba(22, 31, 50, 0.75);
-  border-color: rgba(6, 182, 212, 0.3);
-  transform: translateY(-3px);
-  box-shadow: 0 15px 35px -10px rgba(6, 182, 212, 0.15);
+  background: rgba(36, 34, 32, 0.85);
+  border-color: color-mix(in oklab, var(--gold) 40%, transparent);
+  transform: translateY(-2px);
+  box-shadow: 0 15px 35px -10px rgba(207, 167, 81, 0.12);
 }
 
-/* Gradients */
+/* Text Gradients */
+.text-gold-gradient {
+  background: var(--gradient-gold);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
 .text-gradient {
-  background: linear-gradient(135deg, #ffffff 10%, #38bdf8 55%, #818cf8 100%);
+  background: linear-gradient(135deg, #ffffff 20%, #e2caa0 60%, var(--gold) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.text-gradient-cyan {
-  background: linear-gradient(135deg, #22d3ee 0%, #38bdf8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Gold button styles */
+.btn-gold {
+  background-color: var(--gold);
+  color: var(--primary-foreground);
+  font-weight: 600;
+  transition: all 0.2s ease;
 }
 
-.text-gradient-indigo {
-  background: linear-gradient(135deg, #818cf8 0%, #a855f7 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.btn-gold:hover {
+  background-color: var(--gold-soft);
 }
 
-/* Glowing Border Effect */
-.glow-border {
-  position: relative;
-}
-.glow-border::after {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  background: linear-gradient(90deg, rgba(6, 182, 212, 0.4), rgba(99, 102, 241, 0.4));
-  border-radius: inherit;
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-.glow-border:hover::after {
-  opacity: 1;
-}
-
-/* Pulsing radar for map */
-@keyframes pulse-ring {
+/* Pulsing radar for map in gold */
+@keyframes pulse-ring-gold {
   0% {
     transform: scale(0.6);
     opacity: 0.8;
@@ -120,23 +145,23 @@ body {
   }
 }
 
-.pulse-node {
+.pulse-node-gold {
   position: relative;
 }
-.pulse-node::after {
+.pulse-node-gold::after {
   content: "";
   position: absolute;
   inset: -4px;
   border-radius: 9999px;
-  background: #06b6d4;
-  animation: pulse-ring 2.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+  background: var(--gold);
+  animation: pulse-ring-gold 2.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
 }
 
 /* TV screen subtle scanline effect */
 .tv-screen {
   position: relative;
   overflow: hidden;
-  box-shadow: 0 0 50px rgba(6, 182, 212, 0.15), 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 50px rgba(207, 167, 81, 0.15), 0 25px 50px -12px rgba(0, 0, 0, 0.85);
 }
 
 .tv-screen::before {
@@ -144,11 +169,11 @@ body {
   display: block;
   position: absolute;
   top: 0; left: 0; bottom: 0; right: 0;
-  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 215, 0, 0.02), rgba(0, 0, 0, 0.01), rgba(255, 215, 0, 0.02));
   z-index: 20;
   background-size: 100% 3px, 6px 100%;
   pointer-events: none;
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
 /* Float animation */

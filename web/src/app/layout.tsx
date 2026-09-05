@@ -1,26 +1,34 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Cormorant_Garamond, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-sans",
   subsets: ["latin", "latin-ext"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const cormorant = Cormorant_Garamond({
+  variable: "--font-serif",
   subsets: ["latin", "latin-ext"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-mono",
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "500"],
 });
 
 export const viewport: Viewport = {
-  themeColor: "#06080d",
+  themeColor: "#121211",
   width: "device-width",
   initialScale: 1,
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://alionadvert.cz"),
-  title: "ALION Advert | Prémiová síť digitální reklamy na obrazovkách (Digital Signage)",
+  title: "ALION Advert | Prémiová síť digitální reklamy na obrazovkách",
   description:
     "Propojujeme firmy s frekventovanými místy. Získejte novou vlnu zákazníků díky reklamním spotům v kavárnách, hotelech a fitness centrech, nebo umístěte obrazovku a získejte pasivní provizi.",
   keywords: [
@@ -77,7 +85,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Structured data JSON-LD pro vyhledávače
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -95,14 +102,17 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="cs" className={`${geistSans.variable} ${geistMono.variable} dark antialiased`}>
+    <html
+      lang="cs"
+      className={`${inter.variable} ${cormorant.variable} ${jetbrainsMono.variable} dark antialiased`}
+    >
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-screen bg-[#06080d] text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-200">
+      <body className="min-h-screen bg-[oklch(13%_0.005_60)] text-[oklch(96%_0.01_80)] selection:bg-[oklch(78%_0.13_84)] selection:text-black">
         {children}
       </body>
     </html>

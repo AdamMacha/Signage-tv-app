@@ -4,11 +4,7 @@ import React from "react";
 import {
   Coins,
   CheckCircle2,
-  Wrench,
-  Sparkles,
   ArrowRight,
-  TrendingUp,
-  ShieldAlert,
   Percent,
 } from "lucide-react";
 
@@ -54,17 +50,17 @@ export const VenueHostSection: React.FC = () => {
   };
 
   return (
-    <section id="prostory" className="py-24 relative border-t border-white/5">
+    <section id="prostory" className="py-24 relative border-t border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold mb-4">
-            <Coins className="w-3.5 h-3.5" />
+          <div className="eyebrow mb-3 flex items-center justify-center gap-2">
+            <Coins className="w-3.5 h-3.5 text-[oklch(78%_0.13_84)]" />
             <span>Pasivní příjem pro váš podnik</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
-            Máte prostor. <span className="text-gradient">My máme obrazovku.</span>
+          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-white tracking-normal mb-4">
+            Máte prostor. <span className="italic text-gold-gradient">My máme obrazovku.</span>
           </h2>
-          <p className="text-slate-400 text-base sm:text-lg">
+          <p className="text-muted-foreground text-base sm:text-lg">
             Proměňte prázdnou zeď ve vaší kavárně, hotelu, čekárně nebo posilovně ve stálý
             zdroj příjmů. Bez počátečních investic a bez jakýchkoli starostí.
           </p>
@@ -75,22 +71,22 @@ export const VenueHostSection: React.FC = () => {
           {steps.map((s, idx) => (
             <div
               key={idx}
-              className="glass-card p-6 border-white/10 flex flex-col justify-between hover:border-indigo-500/30 transition-all group"
+              className="glass-card bg-surface p-6 border-border flex flex-col justify-between hover:border-[oklch(78%_0.13_84)]/40 transition-all group"
             >
               <div>
-                <div className="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 font-mono font-bold flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <div className="w-10 h-10 rounded-lg bg-[oklch(78%_0.13_84)]/10 border border-[oklch(78%_0.13_84)]/25 text-[oklch(78%_0.13_84)] font-mono font-bold flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                   0{s.num}
                 </div>
                 <h3 className="text-base font-bold text-white mb-2 tracking-tight">
                   {s.title}
                 </h3>
-                <p className="text-xs text-slate-300 leading-relaxed">
+                <p className="text-xs text-muted-foreground leading-relaxed">
                   {s.desc}
                 </p>
               </div>
 
-              <div className="mt-6 pt-3 border-t border-white/5 flex items-center gap-1.5 text-[11px] text-slate-500">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+              <div className="mt-6 pt-3 border-t border-border/40 flex items-center gap-1.5 text-[11px] text-muted-foreground font-mono">
+                <CheckCircle2 className="w-3.5 h-3.5 text-[oklch(78%_0.13_84)]" />
                 <span>Garance profesionality</span>
               </div>
             </div>
@@ -98,16 +94,16 @@ export const VenueHostSection: React.FC = () => {
         </div>
 
         {/* Bottom Banner with Key Assurances */}
-        <div className="glass-panel p-8 sm:p-10 border-indigo-500/20 flex flex-col md:flex-row items-center justify-between gap-8 bg-gradient-to-r from-indigo-950/20 via-[#0e1320] to-cyan-950/20">
+        <div className="glass-panel p-8 sm:p-10 border-[oklch(78%_0.13_84)]/25 flex flex-col md:flex-row items-center justify-between gap-8 bg-surface">
           <div className="space-y-2 max-w-2xl">
-            <div className="inline-flex items-center gap-2 text-xs font-semibold text-indigo-400 mb-1">
+            <div className="inline-flex items-center gap-2 text-xs font-semibold text-[oklch(78%_0.13_84)] font-mono uppercase tracking-wider mb-1">
               <Percent className="w-4 h-4" />
               <span>Nulové počáteční náklady & nulové riziko</span>
             </div>
-            <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+            <h3 className="font-display text-2xl sm:text-3xl font-medium text-white tracking-normal">
               Máte vhodný prostor? Zjistěte nezávazně výši vaší měsíční provize.
             </h3>
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
               Ozvěte se nám a my spočítáme odhadovanou provizi podle typu prostoru a jeho
               návštěvnosti. Instalaci i zařízení hradíme my.
             </p>
@@ -115,7 +111,7 @@ export const VenueHostSection: React.FC = () => {
 
           <button
             onClick={scrollToVenueForm}
-            className="shrink-0 px-7 py-4 rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-500 hover:to-cyan-500 text-white font-semibold text-sm shadow-xl shadow-indigo-500/20 transition flex items-center gap-2 cursor-pointer"
+            className="shrink-0 px-8 py-4 rounded-none bg-[oklch(78%_0.13_84)] hover:bg-[oklch(85%_0.09_85)] text-black font-semibold text-xs uppercase tracking-widest transition flex items-center gap-2 cursor-pointer shadow-lg shadow-[oklch(78%_0.13_84)]/15"
           >
             <span>Nabídnout prostor pro TV</span>
             <ArrowRight className="w-4 h-4" />
