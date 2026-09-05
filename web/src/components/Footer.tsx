@@ -157,7 +157,7 @@ export const Footer: React.FC = () => {
 
             <div className="pt-4">
               <a
-                href="http://localhost:3001"
+                href="https://alionadvert-admin.vercel.app/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900 border border-white/10 hover:border-white/20 text-slate-400 hover:text-white text-[11px] font-medium transition"
