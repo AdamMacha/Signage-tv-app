@@ -30,17 +30,14 @@ export default function LoginPage() {
 
         setLoading(true);
 
-        // Simulace krátkého ověření pro hladký UX efekt
-        await new Promise((r) => setTimeout(r, 400));
-
-        const ok = login(password);
-        if (ok) {
+        const result = await login(password);
+        if (result.success) {
             setSuccess(true);
             setTimeout(() => {
                 router.replace("/");
             }, 500);
         } else {
-            setError("Nesprávné administrátorské heslo. Přístup byl odepřen.");
+            setError(result.error || "Nesprávné administrátorské heslo. Přístup byl odepřen.");
             setLoading(false);
         }
     };
@@ -152,7 +149,7 @@ export default function LoginPage() {
 
                     <div className="mt-6 pt-5 border-t border-white/5 flex items-center justify-center gap-2 text-[11px] text-slate-500">
                         <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                        <span>Chráněno konfigurovaným API klíčem</span>
+                        <span>Zabezpečené ověření přímo proti backend serveru</span>
                     </div>
                 </div>
             </div>
