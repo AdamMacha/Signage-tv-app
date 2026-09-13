@@ -235,7 +235,7 @@ export const Footer: React.FC = () => {
       {/* Modal pro GDPR, Podmínky a Instalaci TV aplikace */}
       {legalModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-          <div className="glass-panel p-6 sm:p-8 max-w-xl w-full bg-[#181817] border-border max-h-[85vh] overflow-y-auto">
+          <div className="glass-panel p-6 sm:p-8 max-w-2xl w-full bg-[#181817] border-border max-h-[88vh] overflow-y-auto">
             <div className="flex items-center justify-between pb-4 mb-4 border-b border-border/60">
               <h3 className="font-display text-2xl font-medium text-white">
                 {legalModal === "privacy"
@@ -256,12 +256,12 @@ export const Footer: React.FC = () => {
               {legalModal === "install" ? (
                 <>
                   <p>
-                    Aplikace <strong className="text-white">ALION Advert</strong> přemění vaši televizi nebo obrazovku
+                    Aplikace <strong className="text-white">ALION Advert</strong> přemění vaši obrazovku
                     na inteligentní reklamní bod. Je navržena pro spolehlivý provoz (24/7), automatické spuštění
                     po zapnutí a plynulé offline ukládání videí.
                   </p>
 
-                  <div className="p-4 rounded-lg bg-surface border border-border space-y-3">
+                  <div className="p-4 rounded-lg bg-surface border border-border">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                       <div>
                         <div className="text-white font-semibold text-sm">ALION Signage TV App</div>
@@ -278,25 +278,65 @@ export const Footer: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="space-y-3 pt-2">
-                    <h4 className="text-xs font-bold text-white uppercase tracking-wider">
-                      Jak nainstalovat aplikaci do televize:
-                    </h4>
-                    <ol className="space-y-2 list-decimal list-inside text-xs leading-relaxed text-slate-300">
+                  {/* Varianta 1: Přímo v televizi z prohlížeče */}
+                  <div className="p-4 rounded-lg bg-[#141413] border border-border/80 space-y-2.5">
+                    <div className="flex items-center gap-2">
+                      <span className="px-2 py-0.5 rounded bg-[oklch(78%_0.13_84)]/15 text-[oklch(78%_0.13_84)] text-[10px] font-bold uppercase tracking-wider font-mono">
+                        Varianta 1 (Nejrychlejší)
+                      </span>
+                      <h4 className="text-xs font-bold text-white">
+                        Stažení přímo v televizi přes prohlížeč
+                      </h4>
+                    </div>
+                    <ol className="space-y-2 list-decimal list-inside text-xs text-slate-300">
                       <li>
-                        <strong className="text-white">Zkopírujte na USB:</strong> Stáhněte soubor <code className="text-[oklch(78%_0.13_84)] bg-surface px-1.5 py-0.5 rounded font-mono">alion-tv.apk</code> a nahrajte jej na flash disk.
+                        <strong className="text-white">Otevřete prohlížeč na TV:</strong> Spusťte v televizi internetový prohlížeč (nebo z Google Play nainstalujte oblíbenou TV aplikaci <em>Downloader by AFTVnews</em>).
                       </li>
                       <li>
-                        <strong className="text-white">Instalace v TV:</strong> Zasuňte flash disk do TV, otevřete jakéhokoliv správce souborů (např. <em>File Commander</em> z Google Play) a balíček nainstalujte.
+                        <strong className="text-white">Zadejte adresu:</strong> Do adresního řádku napište přímo zkrácený odkaz <code className="text-[oklch(78%_0.13_84)] bg-surface px-1.5 py-0.5 rounded font-mono font-semibold">alionadvert.cz/tv.apk</code> (nebo otevřete náš web a klikněte na <em>Stáhnout TV aplikaci</em>).
                       </li>
                       <li>
-                        <strong className="text-white">Spárování:</strong> Spusťte aplikaci na TV, zadejte název své provozovny a klikněte na <em>Registrovat zařízení</em>. V administraci pak stačí k TV přiřadit reklamní smyčku.
+                        <strong className="text-white">Potvrďte instalaci:</strong> Po stažení soubor otevřete. Pokud vás systém vyzve, povolte v Nastavení televize instalaci aplikací z tohoto zdroje a klikněte na <em>Instalovat</em>.
                       </li>
                     </ol>
                   </div>
 
+                  {/* Varianta 2: Přes USB disk */}
+                  <div className="p-4 rounded-lg bg-[#141413] border border-border/80 space-y-2.5">
+                    <div className="flex items-center gap-2">
+                      <span className="px-2 py-0.5 rounded bg-surface border border-border text-slate-400 text-[10px] font-bold uppercase tracking-wider font-mono">
+                        Varianta 2
+                      </span>
+                      <h4 className="text-xs font-bold text-white">
+                        Přes počítač a USB flash disk
+                      </h4>
+                    </div>
+                    <ol className="space-y-2 list-decimal list-inside text-xs text-slate-300">
+                      <li>
+                        <strong className="text-white">Stáhněte do PC:</strong> Stáhněte balíček tlačítkem výše a uložte jej na USB flash disk.
+                      </li>
+                      <li>
+                        <strong className="text-white">Připojte k TV:</strong> Zasuňte flash disk do televize a otevřete libovolného správce souborů (např. <em>File Commander</em> z Google Play).
+                      </li>
+                      <li>
+                        <strong className="text-white">Nainstalujte:</strong> Najděte soubor <code className="text-[oklch(78%_0.13_84)] bg-surface px-1 py-0.5 rounded font-mono">alion-tv.apk</code> na flash disku a spusťte instalaci.
+                      </li>
+                    </ol>
+                  </div>
+
+                  {/* Aktivace po instalaci */}
+                  <div className="p-3.5 rounded-lg bg-surface/60 border border-border/50 space-y-1.5 text-xs text-slate-300">
+                    <div className="text-white font-semibold flex items-center gap-1.5">
+                      <span>✓</span>
+                      <span>Spuštění a registrace (poslední krok):</span>
+                    </div>
+                    <p className="leading-relaxed">
+                      Po instalaci otevřete aplikaci <strong className="text-white">ALION Advert</strong> na TV, zadejte název své provozovny (např. <em>Kavárna – Recepce</em>) a klikněte na <em>Registrovat zařízení</em>. V administraci pak už jen přiřadíte požadovanou reklamní kampaň.
+                    </p>
+                  </div>
+
                   <div className="p-3 rounded bg-amber-500/10 border border-amber-500/20 text-[11px] text-amber-200/90 leading-relaxed">
-                    💡 <strong>Tip pro televize Samsung nebo LG:</strong> Pokud vaše televize nemá systém Android TV, doporučujeme pořídit cenově dostupný <em>Chromecast s Google TV</em> nebo <em>Xiaomi TV Stick</em> (cca 800–1 000 Kč) zapojený do HDMI portu.
+                    💡 <strong>Máte televizi Samsung (Tizen) nebo LG (webOS)?</strong> Na tyto systémy nelze soubory Android APK instalovat přímo. Doporučujeme k TV pořídit cenově dostupný <em>Chromecast s Google TV</em> nebo <em>Xiaomi TV Stick</em> (cca 800–1 000 Kč) zapojený do HDMI portu.
                   </div>
                 </>
               ) : legalModal === "privacy" ? (
