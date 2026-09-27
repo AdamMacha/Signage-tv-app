@@ -206,7 +206,20 @@ export const Footer: React.FC = () => {
 
         {/* Bottom Legal Bar */}
         <div className="pt-8 border-t border-border/40 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
-          <p>© {new Date().getFullYear()} ALION Advert. Všechna práva vyhrazena.</p>
+          <div className="flex flex-col items-center sm:items-start gap-1.5">
+            <p>© {new Date().getFullYear()} ALION Advert. Všechna práva vyhrazena.</p>
+            <p className="text-[11px] text-muted-foreground/70">
+              Tento web vytvořilo na zakázku studio{" "}
+              <a
+                href="https://www.technologio.eu/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[oklch(78%_0.13_84)] transition underline decoration-border hover:decoration-[oklch(78%_0.13_84)] underline-offset-2"
+              >
+                Technologio
+              </a>
+            </p>
+          </div>
 
           <div className="flex items-center gap-6">
             <button
