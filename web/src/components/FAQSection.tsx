@@ -9,52 +9,52 @@ interface FAQItem {
   category: "advertiser" | "venue";
 }
 
+const faqs: FAQItem[] = [
+  {
+    category: "advertiser",
+    q: "Jak rychle můžeme naši kampaň spustit?",
+    a: "Jakmile nám zašlete hotový video spot nebo grafický podklad, dokážeme kampaň v našem cloudovém systému zkontrolovat a nasadit na obrazovky do 24 hodin. V urgentních případech i v rámci několika hodin.",
+  },
+  {
+    category: "advertiser",
+    q: "V jakém formátu a délce má být reklamní spot?",
+    a: "Standardně podporujeme video soubory MP4 (H.264/H.265) ve Full HD (1920×1080) nebo 4K rozlišení v poměru 16:9. Typická délka jednoho zobrazení spotu je 10, 15 nebo 30 sekund. Pokud spot ještě nemáte, rádi vám s jeho přípravou pomůžeme.",
+  },
+  {
+    category: "advertiser",
+    q: "Můžeme reklamní spot v průběhu kampaně změnit?",
+    a: "Ano, a to je jedna z největších výhod digital signage! Na rozdíl od drahého přetisknutí billboardu stačí poslat nové video a my ho vzdáleně nahrajeme a vyměníme během pár minut bez přerušení vysílání.",
+  },
+  {
+    category: "advertiser",
+    q: "Jak přesně se měří úspěšnost a zásah kampaně?",
+    a: "Náš systém přesně eviduje každé spuštění vašeho spotu – víte přesný počet přehrání za hodinu, den i měsíc v každé jednotlivé lokalitě. Znáte průměrnou denní návštěvnost zapojených prostor a frekvenci kontaktu s diváky.",
+  },
+  {
+    category: "venue",
+    q: "Kolik mě stojí instalace a provoz obrazovky v mém podniku?",
+    a: "Provozovatele prostor to nestojí vůbec nic – 0 Kč. Televizní hardware, certifikované montážní držáky, kabely i instalaci naším technikem hradíme my. Naopak vy získáváte pravidelnou měsíční provizi.",
+  },
+  {
+    category: "venue",
+    q: "Jak je to se spotřebou elektřiny a hlukem?",
+    a: "Používáme výhradně moderní nízkoenergetické LED obrazovky s energetickou třídou šetrnou k životnímu prostředí. Navíc je v systému nastaven inteligentní časovač, který obrazovku zapíná až s vaší otevírací dobou a v noci ji přepíná do režimu spánku.",
+  },
+  {
+    category: "venue",
+    q: "Mohu na obrazovce zobrazovat i své vlastní akce a nabídky?",
+    a: "Samozřejmě! V rotační smyčce rádi vyhradíme prostor pro vaše denní menu, sezónní novinky nebo akce vašeho podniku. Obrazovka tak slouží nejen jako zdroj pasivního příjmu, ale i jako atraktivní digitální tabule pro vaše hosty.",
+  },
+  {
+    category: "venue",
+    q: "Kdy a jak je mi vyplácena provize z umístění?",
+    a: "Provize je vyplácena každý měsíc přímo na váš bankovní účet na základě přehledného vyúčtování a partnerské smlouvy. Výše provize závisí na atraktivitě lokality a denní návštěvnosti.",
+  },
+];
+
 export const FAQSection: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const [activeCategory, setActiveCategory] = useState<"all" | "advertiser" | "venue">("all");
-
-  const faqs: FAQItem[] = [
-    {
-      category: "advertiser",
-      q: "Jak rychle můžeme naši kampaň spustit?",
-      a: "Jakmile nám zašlete hotový video spot nebo grafický podklad, dokážeme kampaň v našem cloudovém systému zkontrolovat a nasadit na obrazovky do 24 hodin. V urgentních případech i v rámci několika hodin.",
-    },
-    {
-      category: "advertiser",
-      q: "V jakém formátu a délce má být reklamní spot?",
-      a: "Standardně podporujeme video soubory MP4 (H.264/H.265) ve Full HD (1920×1080) nebo 4K rozlišení v poměru 16:9. Typická délka jednoho zobrazení spotu je 10, 15 nebo 30 sekund. Pokud spot ještě nemáte, rádi vám s jeho přípravou pomůžeme.",
-    },
-    {
-      category: "advertiser",
-      q: "Můžeme reklamní spot v průběhu kampaně změnit?",
-      a: "Ano, a to je jedna z největších výhod digital signage! Na rozdíl od drahého přetisknutí billboardu stačí poslat nové video a my ho vzdáleně nahrajeme a vyměníme během pár minut bez přerušení vysílání.",
-    },
-    {
-      category: "advertiser",
-      q: "Jak přesně se měří úspěšnost a zásah kampaně?",
-      a: "Náš systém přesně eviduje každé spuštění vašeho spotu – víte přesný počet přehrání za hodinu, den i měsíc v každé jednotlivé lokalitě. Znáte průměrnou denní návštěvnost zapojených prostor a frekvenci kontaktu s diváky.",
-    },
-    {
-      category: "venue",
-      q: "Kolik mě stojí instalace a provoz obrazovky v mém podniku?",
-      a: "Provozovatele prostor to nestojí vůbec nic – 0 Kč. Televizní hardware, certifikované montážní držáky, kabely i instalaci naším technikem hradíme my. Naopak vy získáváte pravidelnou měsíční provizi.",
-    },
-    {
-      category: "venue",
-      q: "Jak je to se spotřebou elektřiny a hlukem?",
-      a: "Používáme výhradně moderní nízkoenergetické LED obrazovky s energetickou třídou šetrnou k životnímu prostředí. Navíc je v systému nastaven inteligentní časovač, který obrazovku zapíná až s vaší otevírací dobou a v noci ji přepíná do režimu spánku.",
-    },
-    {
-      category: "venue",
-      q: "Mohu na obrazovce zobrazovat i své vlastní akce a nabídky?",
-      a: "Samozřejmě! V rotační smyčce rádi vyhradíme prostor pro vaše denní menu, sezónní novinky nebo akce vašeho podniku. Obrazovka tak slouží nejen jako zdroj pasivního příjmu, ale i jako atraktivní digitální tabule pro vaše hosty.",
-    },
-    {
-      category: "venue",
-      q: "Kdy a jak je mi vyplácena provize z umístění?",
-      a: "Provize je vyplácena každý měsíc přímo na váš bankovní účet na základě přehledného vyúčtování a partnerské smlouvy. Výše provize závisí na atraktivitě lokality a denní návštěvnosti.",
-    },
-  ];
 
   const filteredFaqs =
     activeCategory === "all"

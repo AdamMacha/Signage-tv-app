@@ -15,17 +15,18 @@ import {
   Coins,
 } from "lucide-react";
 
+const venues = [
+  { name: "Kavárny & Bistra", icon: Coffee },
+  { name: "Fitness & Gyms", icon: Dumbbell },
+  { name: "Hotely & Penziony", icon: Hotel },
+  { name: "Čekárny & Kliniky", icon: Stethoscope },
+  { name: "Autoservisy", icon: Car },
+  { name: "Salony & Barber", icon: Sparkles },
+  { name: "Obchody & Showroomy", icon: ShoppingBag },
+  { name: "Recepce & Office", icon: Building2 },
+];
+
 export const AudienceSection: React.FC = () => {
-  const venues = [
-    { name: "Kavárny & Bistra", icon: Coffee },
-    { name: "Fitness & Gyms", icon: Dumbbell },
-    { name: "Hotely & Penziony", icon: Hotel },
-    { name: "Čekárny & Kliniky", icon: Stethoscope },
-    { name: "Autoservisy", icon: Car },
-    { name: "Salony & Barber", icon: Sparkles },
-    { name: "Obchody & Showroomy", icon: ShoppingBag },
-    { name: "Recepce & Office", icon: Building2 },
-  ];
 
   const scrollToForms = (targetType: "advertiser" | "venue") => {
     const el = document.getElementById("lead-forms");

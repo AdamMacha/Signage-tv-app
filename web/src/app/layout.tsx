@@ -5,19 +5,22 @@ import "./globals.css";
 const inter = Inter({
   variable: "--font-sans",
   subsets: ["latin", "latin-ext"],
+  display: "swap",
 });
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-serif",
   subsets: ["latin", "latin-ext"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "600"],
   style: ["normal", "italic"],
+  display: "swap",
 });
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-mono",
   subsets: ["latin", "latin-ext"],
-  weight: ["400", "500"],
+  weight: ["400", "600"],
+  display: "swap",
 });
 
 export const viewport: Viewport = {

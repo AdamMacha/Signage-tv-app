@@ -9,39 +9,40 @@ import {
   Zap,
 } from "lucide-react";
 
+const benefits = [
+  {
+    icon: Cpu,
+    title: "Moderní technologie",
+    desc: "Naše obrazovky běží na vlastním stabilním klientském OS s cloudovou synchronizací v reálném čase a 99.9% dostupností.",
+  },
+  {
+    icon: MapPin,
+    title: "Strategická místa",
+    desc: "Pečlivě vybíráme lokality s reálnou a přirozenou návštěvností, kde mají zákazníci čas vaše sdělení vnímat.",
+  },
+  {
+    icon: Clock,
+    title: "Bleskové spuštění",
+    desc: "Zatímco tisk a výlep billboardu trvá týdny, u nás může vaše kampaň běžet už do 24 hodin od dodání podkladů.",
+  },
+  {
+    icon: RefreshCw,
+    title: "Flexibilní změny obsahu",
+    desc: "Změnila se vám nabídka nebo máte novou akci? Výměnu spotu provedeme vzdáleně během několika minut.",
+  },
+  {
+    icon: Target,
+    title: "Úzké lokální cílení",
+    desc: "Neplaťte za lidi na druhém konci republiky, pokud máte lokální firmu. Cílíme přesně tam, kde působíte.",
+  },
+  {
+    icon: FileCheck2,
+    title: "Transparentní spolupráce",
+    desc: "Jasné smlouvy, férové provize pro majitele prostor a přehledné statistiky přehrávání pro inzerenty.",
+  },
+];
+
 export const WhyUsSection: React.FC = () => {
-  const benefits = [
-    {
-      icon: Cpu,
-      title: "Moderní technologie",
-      desc: "Naše obrazovky běží na vlastním stabilním klientském OS s cloudovou synchronizací v reálném čase a 99.9% dostupností.",
-    },
-    {
-      icon: MapPin,
-      title: "Strategická místa",
-      desc: "Pečlivě vybíráme lokality s reálnou a přirozenou návštěvností, kde mají zákazníci čas vaše sdělení vnímat.",
-    },
-    {
-      icon: Clock,
-      title: "Bleskové spuštění",
-      desc: "Zatímco tisk a výlep billboardu trvá týdny, u nás může vaše kampaň běžet už do 24 hodin od dodání podkladů.",
-    },
-    {
-      icon: RefreshCw,
-      title: "Flexibilní změny obsahu",
-      desc: "Změnila se vám nabídka nebo máte novou akci? Výměnu spotu provedeme vzdáleně během několika minut.",
-    },
-    {
-      icon: Target,
-      title: "Úzké lokální cílení",
-      desc: "Neplaťte za lidi na druhém konci republiky, pokud máte lokální firmu. Cílíme přesně tam, kde působíte.",
-    },
-    {
-      icon: FileCheck2,
-      title: "Transparentní spolupráce",
-      desc: "Jasné smlouvy, férové provize pro majitele prostor a přehledné statistiky přehrávání pro inzerenty.",
-    },
-  ];
 
   return (
     <section className="py-16 sm:py-24 relative bg-surface/30 border-t border-border w-full max-w-full overflow-hidden">

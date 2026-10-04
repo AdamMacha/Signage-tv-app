@@ -1,33 +1,34 @@
 import React from "react";
 import { UploadCloud, Network, Eye } from "lucide-react";
 
+const steps = [
+  {
+    number: "01",
+    title: "Vyberete si kampaň",
+    description:
+      "Pošlete nám svůj reklamní spot nebo statický vizuál. Zvolíte si cílové lokality, typ provozoven a požadovanou délku vysílání.",
+    icon: UploadCloud,
+    highlight: "Okamžité spuštění bez tiskových nákladů",
+  },
+  {
+    number: "02",
+    title: "Dostaneme ji na správná místa",
+    description:
+      "Váš spot vzdáleně nahrajeme a synchronizujeme s naší chytrou sítí televizních obrazovek v kavárnách, fitness centrech, čekárnách i hotelech.",
+    icon: Network,
+    highlight: "Cloudový broadcast v reálném čase",
+  },
+  {
+    number: "03",
+    title: "Vaše značka je skutečně vidět",
+    description:
+      "Reklama se v plynulé rotační smyčce opakovaně přehrává přímo před očima vašich potenciálních zákazníků v prémiové Full HD / 4K kvalitě.",
+    icon: Eye,
+    highlight: "Stovky opakování a tisíce zhlédnutí denně",
+  },
+];
+
 export const ProcessSection: React.FC = () => {
-  const steps = [
-    {
-      number: "01",
-      title: "Vyberete si kampaň",
-      description:
-        "Pošlete nám svůj reklamní spot nebo statický vizuál. Zvolíte si cílové lokality, typ provozoven a požadovanou délku vysílání.",
-      icon: UploadCloud,
-      highlight: "Okamžité spuštění bez tiskových nákladů",
-    },
-    {
-      number: "02",
-      title: "Dostaneme ji na správná místa",
-      description:
-        "Váš spot vzdáleně nahrajeme a synchronizujeme s naší chytrou sítí televizních obrazovek v kavárnách, fitness centrech, čekárnách i hotelech.",
-      icon: Network,
-      highlight: "Cloudový broadcast v reálném čase",
-    },
-    {
-      number: "03",
-      title: "Vaše značka je skutečně vidět",
-      description:
-        "Reklama se v plynulé rotační smyčce opakovaně přehrává přímo před očima vašich potenciálních zákazníků v prémiové Full HD / 4K kvalitě.",
-      icon: Eye,
-      highlight: "Stovky opakování a tisíce zhlédnutí denně",
-    },
-  ];
 
   return (
     <section id="jak-to-funguje" className="py-16 sm:py-24 relative border-t border-[oklch(28%_0.008_70/0.5)] w-full max-w-full overflow-hidden">

@@ -13,74 +13,74 @@ interface NodePoint {
   highlight: string;
 }
 
+const nodes: NodePoint[] = [
+  {
+    id: "praha",
+    name: "Praha",
+    region: "Hlavní město a metropole",
+    x: 38,
+    y: 36,
+    status: "active",
+    highlight: "Vysoká koncentrace prémiových kaváren, hotelů a business zón",
+  },
+  {
+    id: "plzen",
+    name: "Plzeň",
+    region: "Západní Čechy",
+    x: 20,
+    y: 48,
+    status: "active",
+    highlight: "Populární gastro lokality a frekventovaná sportovní centra",
+  },
+  {
+    id: "liberec",
+    name: "Liberec",
+    region: "Severní Čechy",
+    x: 46,
+    y: 18,
+    status: "expanding",
+    highlight: "Nová partnerská místa ve sportovních a retailových centrech",
+  },
+  {
+    id: "hradec",
+    name: "Hradec Králové",
+    region: "Východní Čechy",
+    x: 58,
+    y: 34,
+    status: "active",
+    highlight: "Výborný dosah na vysokoškolskou a aktivní městskou populaci",
+  },
+  {
+    id: "brno",
+    name: "Brno",
+    region: "Jižní Morava",
+    x: 70,
+    y: 68,
+    status: "active",
+    highlight: "Druhá největší metropole s dynamickým technologickým publikem",
+  },
+  {
+    id: "ostrava",
+    name: "Ostrava",
+    region: "Moravskoslezský kraj",
+    x: 88,
+    y: 44,
+    status: "active",
+    highlight: "Strategická obchodní a průmyslová centra s vysokou návštěvností",
+  },
+  {
+    id: "budejovice",
+    name: "České Budějovice",
+    region: "Jižní Čechy",
+    x: 36,
+    y: 78,
+    status: "expanding",
+    highlight: "Rostoucí síť v turisticky a obchodně exponovaných zónách",
+  },
+];
+
 export const NetworkMapSection: React.FC = () => {
   const [selectedNode, setSelectedNode] = useState<string>("praha");
-
-  const nodes: NodePoint[] = [
-    {
-      id: "praha",
-      name: "Praha",
-      region: "Hlavní město a metropole",
-      x: 38,
-      y: 36,
-      status: "active",
-      highlight: "Vysoká koncentrace prémiových kaváren, hotelů a business zón",
-    },
-    {
-      id: "plzen",
-      name: "Plzeň",
-      region: "Západní Čechy",
-      x: 20,
-      y: 48,
-      status: "active",
-      highlight: "Populární gastro lokality a frekventovaná sportovní centra",
-    },
-    {
-      id: "liberec",
-      name: "Liberec",
-      region: "Severní Čechy",
-      x: 46,
-      y: 18,
-      status: "expanding",
-      highlight: "Nová partnerská místa ve sportovních a retailových centrech",
-    },
-    {
-      id: "hradec",
-      name: "Hradec Králové",
-      region: "Východní Čechy",
-      x: 58,
-      y: 34,
-      status: "active",
-      highlight: "Výborný dosah na vysokoškolskou a aktivní městskou populaci",
-    },
-    {
-      id: "brno",
-      name: "Brno",
-      region: "Jižní Morava",
-      x: 70,
-      y: 68,
-      status: "active",
-      highlight: "Druhá největší metropole s dynamickým technologickým publikem",
-    },
-    {
-      id: "ostrava",
-      name: "Ostrava",
-      region: "Moravskoslezský kraj",
-      x: 88,
-      y: 44,
-      status: "active",
-      highlight: "Strategická obchodní a průmyslová centra s vysokou návštěvností",
-    },
-    {
-      id: "budejovice",
-      name: "České Budějovice",
-      region: "Jižní Čechy",
-      x: 36,
-      y: 78,
-      status: "expanding",
-      highlight: "Rostoucí síť v turisticky a obchodně exponovaných zónách",
-    },
-  ];
 
   const currentNode = nodes.find((n) => n.id === selectedNode) || nodes[0];
 

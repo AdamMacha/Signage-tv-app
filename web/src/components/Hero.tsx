@@ -13,43 +13,43 @@ import {
   Sparkles,
 } from "lucide-react";
 
+// Ukázkové dynamické spoty v simulátoru obrazovky
+const sampleAds = [
+  {
+    brand: "L’Aura Coffee & Bistro",
+    category: "Gastro & Kavárna",
+    location: "Praha – Vinohrady",
+    headline: "Ranní káva a čerstvý brunch",
+    subline: "Zastavte se na výběrovou kávu jen 5 minut odtud.",
+    color: "from-[oklch(78%_0.13_84)]/15 via-[oklch(65%_0.16_70)]/10 to-transparent",
+    accent: "#cfa751",
+    badge: "Lokální kampaň",
+  },
+  {
+    brand: "Apex Fitness Hub",
+    category: "Sport & Zdraví",
+    location: "Brno – Centrum",
+    headline: "Vstupte do formy bez kompromisů",
+    subline: "Moderní gym, osobní trenéři a wellness zóna.",
+    color: "from-[oklch(85%_0.09_85)]/15 via-[oklch(78%_0.13_84)]/10 to-transparent",
+    accent: "#e0ca8e",
+    badge: "Sezónní spot",
+  },
+  {
+    brand: "NovaTech Advisory",
+    category: "B2B & IT Služby",
+    location: "Ostrava – Biz Park",
+    headline: "Automatizace firemních procesů",
+    subline: "Ušetřete až 30 % provozních nákladů díky cloud AI.",
+    color: "from-[oklch(78%_0.13_84)]/20 via-[#21201f] to-transparent",
+    accent: "#d4af37",
+    badge: "B2B kampaň",
+  },
+];
+
 export const Hero: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(true);
   const [activeSlide, setActiveSlide] = useState(0);
-
-  // Ukázkové dynamické spoty v simulátoru obrazovky
-  const sampleAds = [
-    {
-      brand: "L’Aura Coffee & Bistro",
-      category: "Gastro & Kavárna",
-      location: "Praha – Vinohrady",
-      headline: "Ranní káva a čerstvý brunch",
-      subline: "Zastavte se na výběrovou kávu jen 5 minut odtud.",
-      color: "from-[oklch(78%_0.13_84)]/15 via-[oklch(65%_0.16_70)]/10 to-transparent",
-      accent: "#cfa751",
-      badge: "Lokální kampaň",
-    },
-    {
-      brand: "Apex Fitness Hub",
-      category: "Sport & Zdraví",
-      location: "Brno – Centrum",
-      headline: "Vstupte do formy bez kompromisů",
-      subline: "Moderní gym, osobní trenéři a wellness zóna.",
-      color: "from-[oklch(85%_0.09_85)]/15 via-[oklch(78%_0.13_84)]/10 to-transparent",
-      accent: "#e0ca8e",
-      badge: "Sezónní spot",
-    },
-    {
-      brand: "NovaTech Advisory",
-      category: "B2B & IT Služby",
-      location: "Ostrava – Biz Park",
-      headline: "Automatizace firemních procesů",
-      subline: "Ušetřete až 30 % provozních nákladů díky cloud AI.",
-      color: "from-[oklch(78%_0.13_84)]/20 via-[#21201f] to-transparent",
-      accent: "#d4af37",
-      badge: "B2B kampaň",
-    },
-  ];
 
   useEffect(() => {
     if (!isPlaying) return;

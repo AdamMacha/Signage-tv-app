@@ -8,49 +8,50 @@ import {
   Zap,
 } from "lucide-react";
 
+const pillars = [
+  {
+    icon: Maximize2,
+    title: "Nepřehlédnutelná viditelnost",
+    subtitle: "Žádný AdBlock ani přeskakování",
+    description:
+      "Zatímco online reklamy lidé ignorují nebo blokují, velká obrazovka ve stylové kavárně, čekárně nebo posilovně přirozeně upoutá pozornost každého návštěvníka.",
+    badge: "100% zhlédnutí",
+  },
+  {
+    icon: MapPin,
+    title: "Přesný lokální zásah",
+    subtitle: "Oslovte zákazníky v jejich čtvrti",
+    description:
+      "Cílíte přesně tam, kde máte provozovnu nebo odkud k vám jezdí zákazníci. Můžete si zvolit konkrétní město, čtvrť nebo typ provozovny.",
+    badge: "Hyper-lokální",
+  },
+  {
+    icon: RotateCw,
+    title: "Vysoká frekvence kontaktu",
+    subtitle: "Opakovaný dojem během celého dne",
+    description:
+      "Váš spot se přehrává ve vyvážené smyčce několikrát za hodinu od rána do večera. Zákazník tak značku vnímá opakovaně a přirozeně si ji zapamatuje.",
+    badge: "Vysoká retence",
+  },
+  {
+    icon: Sliders,
+    title: "Nulové starosti s tiskem",
+    subtitle: "100% digitální distribuce",
+    description:
+      "Žádné tisknutí letáků, vylepování plakátů ani pronájem statických billboardů. Spot nahrajeme na dálku a vysíláme během několika minut.",
+    badge: "Okamžitý start",
+  },
+  {
+    icon: Sparkles,
+    title: "Dynamická flexibilita",
+    subtitle: "Změna obsahu kdykoliv potřebujete",
+    description:
+      "Máte novou sezónní nabídku nebo slevovou akci? Spot můžeme v průběhu běžící kampaně okamžitě vyměnit za nový bez dodatečných montážních poplatků.",
+    badge: "Real-time update",
+  },
+];
+
 export const WhySignageSection: React.FC = () => {
-  const pillars = [
-    {
-      icon: Maximize2,
-      title: "Nepřehlédnutelná viditelnost",
-      subtitle: "Žádný AdBlock ani přeskakování",
-      description:
-        "Zatímco online reklamy lidé ignorují nebo blokují, velká obrazovka ve stylové kavárně, čekárně nebo posilovně přirozeně upoutá pozornost každého návštěvníka.",
-      badge: "100% zhlédnutí",
-    },
-    {
-      icon: MapPin,
-      title: "Přesný lokální zásah",
-      subtitle: "Oslovte zákazníky v jejich čtvrti",
-      description:
-        "Cílíte přesně tam, kde máte provozovnu nebo odkud k vám jezdí zákazníci. Můžete si zvolit konkrétní město, čtvrť nebo typ provozovny.",
-      badge: "Hyper-lokální",
-    },
-    {
-      icon: RotateCw,
-      title: "Vysoká frekvence kontaktu",
-      subtitle: "Opakovaný dojem během celého dne",
-      description:
-        "Váš spot se přehrává ve vyvážené smyčce několikrát za hodinu od rána do večera. Zákazník tak značku vnímá opakovaně a přirozeně si ji zapamatuje.",
-      badge: "Vysoká retence",
-    },
-    {
-      icon: Sliders,
-      title: "Nulové starosti s tiskem",
-      subtitle: "100% digitální distribuce",
-      description:
-        "Žádné tisknutí letáků, vylepování plakátů ani pronájem statických billboardů. Spot nahrajeme na dálku a vysíláme během několika minut.",
-      badge: "Okamžitý start",
-    },
-    {
-      icon: Sparkles,
-      title: "Dynamická flexibilita",
-      subtitle: "Změna obsahu kdykoliv potřebujete",
-      description:
-        "Máte novou sezónní nabídku nebo slevovou akci? Spot můžeme v průběhu běžící kampaně okamžitě vyměnit za nový bez dodatečných montážních poplatků.",
-      badge: "Real-time update",
-    },
-  ];
 
   return (
     <section id="proc-digital-signage" className="py-16 sm:py-24 relative bg-surface/40 border-t border-border w-full max-w-full overflow-hidden">

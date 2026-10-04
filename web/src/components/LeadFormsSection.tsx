@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import confetti from "canvas-confetti";
 import {
   Building2,
   Briefcase,
@@ -70,8 +69,9 @@ export const LeadFormsSection: React.FC = () => {
     return () => window.removeEventListener("switch-lead-form", handleSwitch);
   }, []);
 
-  const triggerConfetti = () => {
+  const triggerConfetti = async () => {
     try {
+      const confetti = (await import("canvas-confetti")).default;
       confetti({
         particleCount: 80,
         spread: 70,

@@ -128,9 +128,7 @@ body {
 }
 
 .glass-card {
-  background: rgba(26, 25, 24, 0.65);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(26, 25, 24, 0.85);
   border: 1px solid var(--border);
   border-radius: 14px;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
