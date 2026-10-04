@@ -14,7 +14,7 @@ import { Footer } from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen bg-[#06080d] text-white flex flex-col">
+    <main className="relative min-h-screen bg-[#121211] text-white flex flex-col w-full max-w-[100vw] overflow-x-clip">
       <Navbar />
       <Hero />
       <ProcessSection />

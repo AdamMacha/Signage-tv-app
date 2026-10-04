@@ -62,14 +62,14 @@ export const FAQSection: React.FC = () => {
       : faqs.filter((item) => item.category === activeCategory);
 
   return (
-    <section id="faq" className="py-24 relative bg-surface/30 border-t border-border">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-14">
+    <section id="faq" className="py-16 sm:py-24 relative bg-surface/30 border-t border-border w-full max-w-full overflow-hidden">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
           <div className="eyebrow mb-3 flex items-center justify-center gap-2">
             <HelpCircle className="w-3.5 h-3.5 text-[oklch(78%_0.13_84)]" />
             <span>Odpovědi na vaše otázky</span>
           </div>
-          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-white tracking-normal mb-4">
+          <h2 className="font-display text-3xl sm:text-5xl md:text-6xl text-white tracking-normal mb-4 break-words">
             Často kladené <span className="italic text-gold-gradient">dotazy</span>
           </h2>
           <p className="text-muted-foreground text-sm sm:text-base">
@@ -77,7 +77,7 @@ export const FAQSection: React.FC = () => {
           </p>
 
           {/* Filter Pill Buttons */}
-          <div className="mt-8 flex items-center justify-center gap-2 font-mono">
+          <div className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-2 font-mono">
             <button
               onClick={() => setActiveCategory("all")}
               className={`px-4 py-2 rounded-sm text-xs font-semibold transition cursor-pointer ${

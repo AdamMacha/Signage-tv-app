@@ -1,33 +1,69 @@
 @import "tailwindcss";
 
+@theme {
+  --color-background: #121211;
+  --color-foreground: #f7f6f2;
+  --color-surface: #1a1918;
+  --color-surface-elevated: #242220;
+  --color-muted: #262523;
+  --color-muted-foreground: #9f9c94;
+  --color-border: rgba(255, 255, 255, 0.12);
+  --color-gold: #cfa751;
+  --color-gold-soft: #e0ca8e;
+  --color-bone: #f2eee3;
+}
+
 :root {
   --radius: 0.25rem;
-  --background: oklch(13% 0.005 60); /* #121211 deep warm carbon */
-  --foreground: oklch(96% 0.01 80);  /* #f7f6f2 warm bone white */
-  --surface: oklch(17% 0.006 60);     /* #1a1918 carbon surface */
-  --surface-elevated: oklch(21% 0.008 60); /* #242220 elevated surface */
-  --muted: oklch(22% 0.005 60);
-  --muted-foreground: oklch(65% 0.01 70);  /* #9f9c94 warm muted */
-  --border: oklch(28% 0.008 70 / 0.6);    /* subtle warm border */
-  --primary: oklch(78% 0.13 84);           /* Alion Aviation luxury gold */
-  --primary-foreground: oklch(13% 0.005 60);
-  --gold: oklch(78% 0.13 84);              /* #cfa751 */
-  --gold-soft: oklch(85% 0.09 85);         /* #e0ca8e */
-  --bone: oklch(94% 0.015 80);
-  --gradient-gold: linear-gradient(135deg, oklch(78% 0.13 84), oklch(65% 0.16 70));
+  --background: #121211;
+  --foreground: #f7f6f2;
+  --surface: #1a1918;
+  --surface-elevated: #242220;
+  --muted: #262523;
+  --muted-foreground: #9f9c94;
+  --border: rgba(255, 255, 255, 0.12);
+  --primary: #cfa751;
+  --primary-foreground: #121211;
+  --gold: #cfa751;
+  --gold-soft: #e0ca8e;
+  --bone: #f2eee3;
+  --gradient-gold: linear-gradient(135deg, #cfa751, #b38b36);
+}
+
+@supports (color: oklch(78% 0.13 84)) {
+  :root {
+    --background: oklch(13% 0.005 60);
+    --foreground: oklch(96% 0.01 80);
+    --surface: oklch(17% 0.006 60);
+    --surface-elevated: oklch(21% 0.008 60);
+    --muted: oklch(22% 0.005 60);
+    --muted-foreground: oklch(65% 0.01 70);
+    --border: oklch(28% 0.008 70 / 0.6);
+    --primary: oklch(78% 0.13 84);
+    --gold: oklch(78% 0.13 84);
+    --gold-soft: oklch(85% 0.09 85);
+    --bone: oklch(94% 0.015 80);
+    --gradient-gold: linear-gradient(135deg, oklch(78% 0.13 84), oklch(65% 0.16 70));
+  }
 }
 
 html {
   scroll-behavior: smooth;
   color-scheme: dark;
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
 }
 
 body {
-  background-color: var(--background);
-  color: var(--foreground);
+  background-color: var(--background, #121211);
+  color: var(--foreground, #f7f6f2);
   font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
   min-height: 100vh;
+  position: relative;
 }
 
 /* Custom Typography classes */
@@ -110,8 +146,9 @@ body {
 /* Text Gradients */
 .text-gold-gradient {
   background: var(--gradient-gold);
-  color: transparent;
+  color: var(--gold, #cfa751);
   -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 

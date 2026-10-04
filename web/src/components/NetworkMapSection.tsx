@@ -85,20 +85,22 @@ export const NetworkMapSection: React.FC = () => {
   const currentNode = nodes.find((n) => n.id === selectedNode) || nodes[0];
 
   return (
-    <section id="sit-obrazovek" className="py-24 relative bg-surface/30 border-t border-border overflow-hidden">
+    <section id="sit-obrazovek" className="py-16 sm:py-24 relative bg-surface/30 border-t border-border overflow-hidden w-full max-w-full">
       {/* Background ambient lighting in gold */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[oklch(78%_0.13_84)]/6 blur-[170px] rounded-full pointer-events-none" />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] max-w-full h-[400px] bg-[oklch(78%_0.13_84)]/6 blur-[120px] rounded-full pointer-events-none" />
+      </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <div className="eyebrow mb-3 flex items-center justify-center gap-2">
             <Radio className="w-3.5 h-3.5 animate-pulse text-[oklch(78%_0.13_84)]" />
             <span>Republikové pokrytí</span>
           </div>
-          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-white tracking-normal mb-4">
+          <h2 className="font-display text-3xl sm:text-5xl md:text-6xl text-white tracking-normal mb-4 break-words">
             Budujeme moderní síť po <span className="italic text-gold-gradient">celé České republice</span>
           </h2>
-          <p className="text-muted-foreground text-base sm:text-lg">
+          <p className="text-muted-foreground text-sm sm:text-base md:text-lg">
             Propojujeme atraktivní lokality do jednotné digitální platformy. Vyberte si jedno město
             nebo oslovte zákazníky v celé síti.
           </p>

@@ -30,13 +30,13 @@ export const ProcessSection: React.FC = () => {
   ];
 
   return (
-    <section id="jak-to-funguje" className="py-24 relative border-t border-[oklch(28%_0.008_70/0.5)]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+    <section id="jak-to-funguje" className="py-16 sm:py-24 relative border-t border-[oklch(28%_0.008_70/0.5)] w-full max-w-full overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <div className="eyebrow mb-3">
             Jednoduchý a rychlý proces
           </div>
-          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-white tracking-normal mb-4">
+          <h2 className="font-display text-3xl sm:text-5xl md:text-6xl text-white tracking-normal mb-4 break-words">
             Jak funguje naše <span className="italic text-gold-gradient">reklamní síť</span>?
           </h2>
           <p className="text-[oklch(65%_0.01_70)] text-base sm:text-lg">

@@ -52,9 +52,9 @@ export const AdvertiserSection: React.FC = () => {
   };
 
   return (
-    <section id="inzerenti" className="py-24 relative bg-surface/30 border-t border-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+    <section id="inzerenti" className="py-16 sm:py-24 relative bg-surface/30 border-t border-border w-full max-w-full overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
           {/* Left Column: Value Proposition & Copy */}
           <div className="lg:col-span-6">
             <div className="eyebrow mb-3 flex items-center gap-2">
@@ -62,7 +62,7 @@ export const AdvertiserSection: React.FC = () => {
               <span>Progresivní venkovní reklama</span>
             </div>
 
-            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-white tracking-normal mb-6 leading-[1.1]">
+            <h2 className="font-display text-3xl sm:text-5xl lg:text-6xl text-white tracking-normal mb-6 leading-[1.1] break-words">
               Dostaňte svou značku{" "}
               <span className="italic text-gold-gradient">přímo před oči zákazníků</span>.
             </h2>

@@ -79,84 +79,86 @@ export const Hero: React.FC = () => {
   const currentAd = sampleAds[activeSlide];
 
   return (
-    <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden">
+    <section className="relative pt-28 pb-16 sm:pt-32 sm:pb-20 md:pt-40 md:pb-32 overflow-hidden w-full max-w-full">
       {/* Subtle Carbon Grid Background */}
       <div className="absolute inset-0 carbon-grid opacity-[0.06] pointer-events-none" />
 
       {/* Ambient background glows (warm gold & dark amber) */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-[oklch(78%_0.13_84)]/10 blur-[170px] rounded-full pointer-events-none" />
-      <div className="absolute top-1/3 right-1/4 w-[500px] h-[350px] bg-[oklch(65%_0.16_70)]/8 blur-[160px] rounded-full pointer-events-none" />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] max-w-full h-[400px] bg-[oklch(78%_0.13_84)]/10 blur-[120px] rounded-full pointer-events-none" />
+        <div className="absolute top-1/3 right-1/4 w-[500px] max-w-full h-[350px] bg-[oklch(65%_0.16_70)]/8 blur-[120px] rounded-full pointer-events-none" />
+      </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-4xl mx-auto mb-14 md:mb-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        <div className="text-center max-w-4xl mx-auto mb-10 sm:mb-14 md:mb-20">
           {/* Eyebrow */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[oklch(78%_0.13_84)]/10 border border-[oklch(78%_0.13_84)]/25 mb-6 backdrop-blur-md">
-            <span className="w-2 h-2 rounded-full bg-[oklch(78%_0.13_84)] animate-pulse" />
+          <div className="inline-flex max-w-full flex-wrap items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-[oklch(78%_0.13_84)]/10 border border-[oklch(78%_0.13_84)]/25 mb-6 backdrop-blur-md">
+            <span className="w-2 h-2 rounded-full bg-[oklch(78%_0.13_84)] animate-pulse shrink-0" />
             <span className="eyebrow !text-[10px] text-[oklch(78%_0.13_84)]">
               Digital Signage Network
             </span>
-            <span className="text-slate-600">•</span>
-            <span className="text-xs text-slate-300 font-sans tracking-normal">
+            <span className="text-slate-600 hidden xs:inline">•</span>
+            <span className="text-[11px] sm:text-xs text-slate-300 font-sans tracking-normal">
               Prémiový reklamní prostor
             </span>
           </div>
 
           {/* Main Headline with Alion typography (Cormorant Garamond display accent) */}
-          <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-balance leading-[1.05] tracking-normal mb-6">
+          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-balance leading-[1.1] sm:leading-[1.05] tracking-normal mb-6 break-words">
             Vaše reklama.{" "}
             <br className="hidden sm:inline" />
-            <span className="italic text-gold-gradient">
+            <span className="italic text-gold-gradient inline-block">
               Na správném místě. Ve správný čas.
             </span>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-base sm:text-lg md:text-xl text-[oklch(65%_0.01_70)] max-w-2xl mx-auto font-normal leading-relaxed mb-10">
+          <p className="text-sm sm:text-lg md:text-xl text-[oklch(65%_0.01_70)] max-w-2xl mx-auto font-normal leading-relaxed mb-8 sm:mb-10 px-2">
             Propojujeme firmy, které chtějí být vidět, s prestižními a frekventovanými
             místy, kde jejich reklamní spoty skutečně uvidí lidé každý den.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 max-w-md mx-auto w-full px-2">
             <button
               onClick={() => scrollToForms("advertiser")}
-              className="w-full sm:w-auto px-8 py-4 rounded-none bg-[oklch(78%_0.13_84)] hover:bg-[oklch(85%_0.09_85)] text-black font-semibold text-xs uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 group cursor-pointer shadow-xl shadow-[oklch(78%_0.13_84)]/20"
+              className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-none bg-[oklch(78%_0.13_84)] hover:bg-[oklch(85%_0.09_85)] text-black font-semibold text-xs uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 group cursor-pointer shadow-xl shadow-[oklch(78%_0.13_84)]/20"
             >
               <span>Chci propagovat svou firmu</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform shrink-0" />
             </button>
 
             <button
               onClick={() => scrollToForms("venue")}
-              className="w-full sm:w-auto px-8 py-4 rounded-none bg-surface hover:bg-surface-elevated border border-[oklch(28%_0.008_70/0.6)] hover:border-[oklch(78%_0.13_84)]/50 text-[oklch(96%_0.01_80)] font-medium text-xs uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer backdrop-blur-md"
+              className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-none bg-surface hover:bg-surface-elevated border border-[oklch(28%_0.008_70/0.6)] hover:border-[oklch(78%_0.13_84)]/50 text-[oklch(96%_0.01_80)] font-medium text-xs uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer backdrop-blur-md"
             >
-              <Building2 className="w-4 h-4 text-[oklch(78%_0.13_84)]" />
+              <Building2 className="w-4 h-4 text-[oklch(78%_0.13_84)] shrink-0" />
               <span>Chci umístit obrazovku</span>
             </button>
           </div>
 
           {/* Trust Badges Bar */}
-          <div className="mt-12 pt-8 border-t border-[oklch(28%_0.008_70/0.4)] flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs text-[oklch(65%_0.01_70)]">
+          <div className="mt-10 sm:mt-12 pt-6 sm:pt-8 border-t border-[oklch(28%_0.008_70/0.4)] flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-8 text-xs text-[oklch(65%_0.01_70)]">
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-[oklch(78%_0.13_84)]" />
+              <CheckCircle2 className="w-4 h-4 text-[oklch(78%_0.13_84)] shrink-0" />
               <span>100% digitální vzdálená správa</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-[oklch(78%_0.13_84)]" />
+              <CheckCircle2 className="w-4 h-4 text-[oklch(78%_0.13_84)] shrink-0" />
               <span>Ultra HD vysílání & plynulá smyčka</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-[oklch(78%_0.13_84)]" />
+              <CheckCircle2 className="w-4 h-4 text-[oklch(78%_0.13_84)] shrink-0" />
               <span>Pravidelná pasivní provize pro partnery</span>
             </div>
           </div>
         </div>
 
         {/* ── Realistic Hero Visual: Simulated 4K Smart Signage TV ── */}
-        <div className="relative max-w-5xl mx-auto mt-6">
+        <div className="relative max-w-5xl mx-auto mt-6 w-full">
           {/* Ambient Screen Backlight (Ambilight gold glow effect) */}
           <div
-            className="absolute -inset-4 md:-inset-8 blur-3xl opacity-30 transition-all duration-1000 -z-10 rounded-3xl"
+            className="absolute -inset-1 sm:-inset-4 md:-inset-8 blur-xl sm:blur-2xl md:blur-3xl opacity-30 transition-all duration-1000 -z-10 rounded-3xl pointer-events-none"
             style={{
               background: `radial-gradient(circle, ${currentAd.accent} 0%, rgba(207,167,81,0.2) 50%, transparent 80%)`,
             }}

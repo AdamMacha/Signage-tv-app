@@ -162,17 +162,19 @@ export const LeadFormsSection: React.FC = () => {
   };
 
   return (
-    <section id="lead-forms" className="py-24 relative bg-surface/20 border-t border-border">
+    <section id="lead-forms" className="py-16 sm:py-24 relative bg-surface/20 border-t border-border overflow-hidden w-full max-w-full">
       {/* Background ambient light */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-[oklch(78%_0.13_84)]/8 blur-[180px] rounded-full pointer-events-none" />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] max-w-full h-[500px] bg-[oklch(78%_0.13_84)]/8 blur-[120px] rounded-full pointer-events-none" />
+      </div>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-2xl mx-auto mb-12">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
           <div className="eyebrow mb-3 flex items-center justify-center gap-2">
             <Send className="w-3.5 h-3.5 text-[oklch(78%_0.13_84)]" />
             <span>Nezávazný kontakt</span>
           </div>
-          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-white tracking-normal mb-4">
+          <h2 className="font-display text-3xl sm:text-5xl md:text-6xl text-white tracking-normal mb-4 break-words">
             Začněme spolupracovat ještě <span className="italic text-gold-gradient">dnes</span>
           </h2>
           <p className="text-muted-foreground text-sm sm:text-base">
@@ -181,7 +183,7 @@ export const LeadFormsSection: React.FC = () => {
           </p>
 
           {/* Tab Switcher */}
-          <div className="mt-8 inline-flex p-1.5 rounded-sm bg-surface-elevated border border-border shadow-xl backdrop-blur-xl">
+          <div className="mt-6 sm:mt-8 inline-flex max-w-full p-1.5 rounded-sm bg-surface-elevated border border-border shadow-xl backdrop-blur-xl">
             <button
               type="button"
               onClick={() => {

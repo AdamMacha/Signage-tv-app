@@ -65,11 +65,11 @@ export const Navbar: React.FC = () => {
   };
 
   return (
-    <header className="fixed top-0 inset-x-0 z-50 px-3 sm:px-6 pt-3 sm:pt-4 pointer-events-none">
-      <div className="max-w-6xl mx-auto pointer-events-auto">
+    <header className="fixed top-0 inset-x-0 z-50 px-2.5 sm:px-6 pt-2.5 sm:pt-4 pointer-events-none w-full max-w-full">
+      <div className="max-w-6xl mx-auto pointer-events-auto w-full">
         {/* Floating Luxury Glass Pill Bar */}
         <div
-          className={`transition-all duration-300 rounded-2xl sm:rounded-full border px-4 sm:px-6 py-2.5 flex items-center justify-between shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_12px_40px_rgba(0,0,0,0.65)] backdrop-blur-2xl ${
+          className={`transition-all duration-300 rounded-2xl sm:rounded-full border px-3 sm:px-6 py-2 sm:py-2.5 flex items-center justify-between shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_12px_40px_rgba(0,0,0,0.65)] backdrop-blur-2xl ${
             scrolled
               ? "bg-[#100f0e]/95 border-[oklch(32%_0.01_70/0.8)] shadow-black/90"
               : "bg-[#131211]/80 border-[oklch(28%_0.008_70/0.6)] hover:border-[oklch(38%_0.015_70/0.7)]"
@@ -225,10 +225,10 @@ export const Navbar: React.FC = () => {
               Prostory
             </button>
 
-            {/* Primary Luxury Gold Action Pill Button */}
+            {/* Primary Luxury Gold Action Pill Button (Tablet & Desktop) */}
             <button
               onClick={() => scrollToLead("advertiser")}
-              className="relative group overflow-hidden rounded-full cursor-pointer focus:outline-none transition-transform duration-200 active:scale-[0.98]"
+              className="hidden sm:inline-flex relative group overflow-hidden rounded-full cursor-pointer focus:outline-none transition-transform duration-200 active:scale-[0.98]"
             >
               <span className="inline-flex items-center gap-1.5 px-4 sm:px-5 py-2 rounded-full bg-gradient-to-r from-[oklch(78%_0.13_84)] to-[oklch(85%_0.09_85)] text-black text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-[0_0_15px_oklch(78%_0.13_84/0.25)] group-hover:shadow-[0_0_25px_oklch(78%_0.13_84/0.45)] group-hover:brightness-105">
                 <span>Chci inzerovat</span>

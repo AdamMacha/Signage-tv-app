@@ -50,14 +50,14 @@ export const VenueHostSection: React.FC = () => {
   };
 
   return (
-    <section id="prostory" className="py-24 relative border-t border-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+    <section id="prostory" className="py-16 sm:py-24 relative border-t border-border w-full max-w-full overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <div className="eyebrow mb-3 flex items-center justify-center gap-2">
             <Coins className="w-3.5 h-3.5 text-[oklch(78%_0.13_84)]" />
             <span>Pasivní příjem pro váš podnik</span>
           </div>
-          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-white tracking-normal mb-4">
+          <h2 className="font-display text-3xl sm:text-5xl md:text-6xl text-white tracking-normal mb-4 break-words">
             Máte prostor. <span className="italic text-gold-gradient">My máme obrazovku.</span>
           </h2>
           <p className="text-muted-foreground text-base sm:text-lg">
